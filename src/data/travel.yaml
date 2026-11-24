@@ -33,10 +33,10 @@ countries:
       - { name: Nainital, lat: 29.38, lon: 79.46, story: "ARIES Training School in Observational Astronomy, 2022." }
       - { name: Mumbai, lat: 19.13, lon: 72.91, story: "Talks at IIT Bombay." }
       - { name: Bhubaneswar, lat: 20.30, lon: 85.82, story: "Vikiran seminar at NISER, Feb 2024." }
-      - { name: Dehradun, lat: 30.32, lon: 78.03, story: "Trip with family, Jan 2026." }
-      - { name: Somnath, lat: 20.89, lon: 70.40, story: "Trip with family, Jan 2026." }
-      - { name: Gir, lat: 21.12, lon: 70.82, story: "Gir National Park, Jan 2026." }
-      - { name: Dwarka, lat: 22.24, lon: 68.97, story: "Trip with family, Jan 2026." }
+      - { name: Dehradun, lat: 30.32, lon: 78.03, story: "Vacation, Jan 2026." }
+      - { name: Somnath, lat: 20.89, lon: 70.40, story: "Vacation, Jan 2026." }
+      - { name: Gir, lat: 21.12, lon: 70.82, story: "Vacation, Jan 2026." }
+      - { name: Dwarka, lat: 22.24, lon: 68.97, story: "Vacation, Jan 2026." }
   - id: "840"
     iso: US
     continent: North America
@@ -51,9 +51,9 @@ countries:
     places:
       - { name: Madrid, lat: 40.42, lon: -3.70, story: "ESA–ESO Euclid workshop, Oct 2022." }
       - { name: La Palma, lat: 28.68, lon: -17.86, story: "MunichFest 2025: 40 years of hot luminous stars." }
-      - { name: Girona, lat: 41.98, lon: 2.82, story: "Trip with friends and family, Aug 2024." }
-      - { name: Barcelona, lat: 41.39, lon: 2.17, story: "Trip with friends and family, Aug 2024." }
-      - { name: Costa Brava, lat: 41.72, lon: 2.93, story: "Along the coast, Aug 2024." }
+      - { name: Girona, lat: 41.98, lon: 2.82, story: "Vacation, Aug 2024." }
+      - { name: Barcelona, lat: 41.39, lon: 2.17, story: "Vacation, Aug 2024, and Sept 2026." }
+      - { name: Costa Brava, lat: 41.72, lon: 2.93, story: "Vacation, Aug 2024." }
   - id: "056"
     iso: BE
     continent: Europe
@@ -65,13 +65,13 @@ countries:
     continent: Europe
     name: Switzerland
     places:
-      - { name: Lausanne, lat: 46.52, lon: 6.63, story: "EAS 2026: talk, poster and volunteering." }
+      - { name: Lausanne, lat: 46.52, lon: 6.63, story: "EAS 2026." }
   - id: "372"
     iso: IE
     continent: Europe
     name: Ireland
     places:
-      - { name: Cork, lat: 51.90, lon: -8.47, story: "EAS 2025, as a volunteer." }
+      - { name: Cork, lat: 51.90, lon: -8.47, story: "EAS 2025." }
   - id: "300"
     iso: GR
     continent: Europe
@@ -86,66 +86,66 @@ countries:
     name: Italy
     places:
       - { name: Padova, lat: 45.41, lon: 11.88, story: "EAS Early Career Astronomers, Jun 2024; back with friends in Sep 2025." }
-      - { name: Trieste, lat: 45.65, lon: 13.78, story: "Trip with friends and family, Apr 2024." }
-      - { name: Verona, lat: 45.44, lon: 10.99, story: "Trip with friends and family, Sep 2025." }
+      - { name: Trieste, lat: 45.65, lon: 13.78, story: "Vacation, Apr 2024." }
+      - { name: Verona, lat: 45.44, lon: 10.99, story: "Vacation, Sep 2025." }
   - id: "203"
     iso: CZ
     continent: Europe
     name: Czech Republic
     places:
-      - { name: Prague, lat: 50.08, lon: 14.44, story: "Trip with friends and family, Dec 2023." }
+      - { name: Prague, lat: 50.08, lon: 14.44, story: "Vacation, Dec 2023." }
   - id: "442"
     iso: LU
     continent: Europe
     name: Luxembourg
     places:
-      - { name: Luxembourg City, lat: 49.61, lon: 6.13, story: "Two visits: Feb 2024 and Sep 2024." }
+      - { name: Luxembourg City, lat: 49.61, lon: 6.13, story: "Vacation: Feb 2024 and Sep 2024." }
   - id: "250"
     iso: FR
     continent: Europe
     name: France
     places:
-      - { name: Paris, lat: 48.86, lon: 2.35, story: "Trip with friends and family, Mar 2024." }
-      - { name: Cerbère, lat: 42.44, lon: 3.17, story: "On the Mediterranean at the Spanish border, Aug 2024." }
-      - { name: Strasbourg, lat: 48.58, lon: 7.75, story: "Trip with friends and family, Dec 2024." }
+      - { name: Paris, lat: 48.86, lon: 2.35, story: "Vacation, Mar 2024." }
+      - { name: Cerbère, lat: 42.44, lon: 3.17, story: "Vacation, Aug 2024." }
+      - { name: Strasbourg, lat: 48.58, lon: 7.75, story: "Vacation, Dec 2024." }
   - id: "705"
     iso: SI
     continent: Europe
     name: Slovenia
     places:
-      - { name: Ljubljana, lat: 46.06, lon: 14.51, story: "Trip with friends and family, Apr 2024." }
+      - { name: Ljubljana, lat: 46.06, lon: 14.51, story: "Vacation, Apr 2024." }
   - id: "528"
     iso: NL
     continent: Europe
     name: Netherlands
     places:
-      - { name: Amsterdam, lat: 52.37, lon: 4.90, story: "Trip with friends and family, May 2024." }
-      - { name: The Hague, lat: 52.08, lon: 4.30, story: "May 2024." }
-      - { name: Leiden, lat: 52.16, lon: 4.49, story: "May 2024." }
+      - { name: Amsterdam, lat: 52.37, lon: 4.90, story: "Vacation, May 2024." }
+      - { name: The Hague, lat: 52.08, lon: 4.30, story: "Vacation, May 2024." }
+      - { name: Leiden, lat: 52.16, lon: 4.49, story: "Vacation, May 2024." }
   - id: "703"
     iso: SK
     continent: Europe
     name: Slovakia
     places:
-      - { name: Bratislava, lat: 48.15, lon: 17.11, story: "Trip with friends and family, Dec 2024." }
+      - { name: Bratislava, lat: 48.15, lon: 17.11, story: "Vacation, Dec 2024." }
   - id: "040"
     iso: AT
     continent: Europe
     name: Austria
     places:
-      - { name: Vienna, lat: 48.21, lon: 16.37, story: "Trip with friends and family, Jan 2025." }
-      - { name: Obergurgl, lat: 46.87, lon: 11.03, story: "In the Ötztal Alps, Nov 2025." }
+      - { name: Vienna, lat: 48.21, lon: 16.37, story: "Vacation, Jan 2025." }
+      - { name: Obergurgl, lat: 46.87, lon: 11.03, story: "HGSFP Winter School, Nov 2025." }
   - id: "470"
     iso: MT
     continent: Europe
     name: Malta
     places:
-      - { name: Valletta, lat: 35.90, lon: 14.51, story: "The view over the Grand Harbour, Aug 2025.", photos: [/images/travel/valletta.jpg] }
-      - { name: Mdina, lat: 35.89, lon: 14.40, story: "The old walled capital, Aug 2025." }
-      - { name: Comino, lat: 36.01, lon: 14.33, story: "Island trip, Aug 2025." }
+      - { name: Valletta, lat: 35.90, lon: 14.51, story: "Vacation, Aug 2025.", photos: [/images/travel/valletta.jpg] }
+      - { name: Mdina, lat: 35.89, lon: 14.40, story: "Vacation, Aug 2025." }
+      - { name: Comino, lat: 36.01, lon: 14.33, story: "Vacation, Aug 2025." }
   - id: "208"
     iso: DK
     continent: Europe
     name: Denmark
     places:
-      - { name: Copenhagen, lat: 55.68, lon: 12.57, story: "Trip with friends and family, Aug 2026." }
+      - { name: Copenhagen, lat: 55.68, lon: 12.57, story: "Vacation, Aug 2026." }
