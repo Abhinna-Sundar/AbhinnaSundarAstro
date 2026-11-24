@@ -40,3 +40,15 @@ export const fonts = {
   'jakarta':               ['Plus Jakarta Sans', 'Plus Jakarta Sans'],
   'syne-inter':            ['Syne', 'Inter'],
 };
+
+// Turn names listed in links.yaml into links. Returns HTML (use with set:html).
+const linkList = load('links.yaml').sort((a, b) => b.text.length - a.text.length);
+const escHtml = s => String(s ?? '').replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;');
+const reEsc = s => s.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
+const linkRe = new RegExp('(?<![\\w-])(' + linkList.map(l => reEsc(escHtml(l.text))).join('|') + ')(?![\\w-])', 'g');
+export function linkify(text) {
+  return escHtml(text).replace(linkRe, m => {
+    const l = linkList.find(x => escHtml(x.text) === m);
+    return `<a class="ref" href="${l.url}" target="_blank" rel="noopener">${m}</a>`;
+  });
+}

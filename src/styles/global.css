@@ -213,3 +213,12 @@ figure.pic.missing{display:grid;place-items:center;background:radial-gradient(el
 main>section{padding-block:40px 72px}
 .banner{margin-top:4px}
 #themeBtn svg{display:block}
+
+a.ref{color:inherit;text-decoration:underline;text-decoration-style:dotted;text-decoration-color:var(--muted);text-underline-offset:3px}
+a.ref:hover{color:var(--bstar);text-decoration-style:solid}
+.quote{margin:8px 0 0;padding:26px 28px;border-radius:var(--r);background:linear-gradient(120deg,color-mix(in srgb,var(--ha) 10%,var(--surface)),var(--surface));border:1px solid var(--line);display:grid;gap:8px}
+.quote q{font:500 clamp(20px,2.6vw,28px)/1.35 var(--f-display);quotes:"\201C" "\201D"}
+.quote cite{font:400 12.5px var(--f-mono);color:var(--muted);font-style:normal}
+.orgs{display:flex;flex-wrap:wrap;gap:6px}
+.soon{display:grid;place-items:center;text-align:center;gap:14px;padding:72px 20px;border:1px dashed var(--line);border-radius:var(--r);background:var(--surface)}
+.soon .badge{font:500 12px var(--f-mono);letter-spacing:.08em;text-transform:uppercase;color:var(--gold);border:1px solid color-mix(in srgb,var(--gold) 45%,transparent);border-radius:999px;padding:4px 12px}

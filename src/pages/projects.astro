@@ -1,7 +1,7 @@
 ---
 import Layout from '../layouts/Layout.astro';
 import Pic from '../components/Pic.astro';
-import { projects } from '../lib/data.js';
+import { projects, linkify } from '../lib/data.js';
 ---
 <Layout title="Data & ML" current="projects">
 <section><div class="wrap">
@@ -24,7 +24,7 @@ import { projects } from '../lib/data.js';
   <h2 class="sec">Toolkit</h2>
   <div class="skills">
     {projects.toolkit.map(t => <div class="card"><h3>{t.title}</h3><div class="tags">{t.tags.map(x => <span class="tag">{x}</span>)}</div></div>)}
-    <div class="card"><h3>Business training</h3><p>{projects.business}</p></div>
+    <div class="card"><h3>Business training</h3><p set:html={linkify(projects.business)} /></div>
   </div>
 </div></section>
 </Layout>

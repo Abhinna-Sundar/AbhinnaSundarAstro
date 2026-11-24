@@ -20,3 +20,8 @@
   credit: "ESO/A. Ghizzi Panizza (CC BY 4.0)"
   page: "https://eso.org/public/images/dsc0565-cc"
   alt: "The Milky Way over the Paranal Observatory"
+- id: gaia
+  url: "https://cdn.eso.org/images/screen/ESA_Gaia_DR2_AllSky_Brightness_Colour_black_bg_8k.jpg"
+  credit: "ESA/Gaia/DPAC (CC BY-SA 3.0 IGO)"
+  page: "https://eso.org/public/images/ESA_Gaia_DR2_AllSky_Brightness_Colour_black_bg_8k"
+  alt: "Gaia's all-sky map of the Milky Way"

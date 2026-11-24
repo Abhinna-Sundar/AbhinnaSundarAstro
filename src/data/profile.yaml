@@ -19,6 +19,9 @@ lede: >-
   Day to day that means Python pipelines, statistical inference and machine
   learning on large spectroscopic and photometric datasets.
 status: "Open to data science & AI roles"
+# Quote shown on the homepage (leave empty "" to hide it)
+quote: "Follow the evidence wherever it leads, and question everything."
+quote_source: "Cosmos: A Spacetime Odyssey, Episode 13"
 email: "abhinna.samantaray@uni-heidelberg.de"
 cv: "/cv.pdf"
 orcid: "0000-0002-0635-2264"

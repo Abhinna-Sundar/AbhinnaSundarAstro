@@ -1,7 +1,7 @@
 ---
 import Layout from '../layouts/Layout.astro';
 import IconLink from '../components/IconLink.astro';
-import { profile, about, url } from '../lib/data.js';
+import { profile, about, url, linkify } from '../lib/data.js';
 import fs from 'node:fs';
 const hasPhoto = fs.existsSync('public' + profile.photo);
 ---
@@ -10,11 +10,11 @@ const hasPhoto = fs.existsSync('public' + profile.photo);
   <div class="about">
     <div>
       <div class="page-head" style="margin-bottom:20px"><p class="eyebrow">About</p><h1>Hi, I'm {profile.short_name}.</h1></div>
-      <div class="prose">{about.about.trim().split(/\n\s*\n/).map(p => <p>{p}</p>)}</div>
+      <div class="prose">{about.about.trim().split(/\n\s*\n/).map(p => <p set:html={linkify(p)} />)}</div>
     </div>
     <div>
       {hasPhoto && <div class="portrait" style="max-width:240px;margin:0 auto 28px"><div class="ring"></div><img src={url(profile.photo)} alt={`Portrait of ${profile.name}`} /></div>}
-      <ul class="tl">{about.timeline.map(t => <li><span class="y">{t.years}</span><div><b>{t.title}</b><span>{t.sub}</span></div></li>)}</ul>
+      <ul class="tl">{about.timeline.map(t => <li><span class="y">{t.years}</span><div><b set:html={linkify(t.title)} /><span set:html={linkify(t.sub)} /></div></li>)}</ul>
     </div>
   </div>
   <div class="cvbox">

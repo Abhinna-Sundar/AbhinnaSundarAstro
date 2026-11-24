@@ -1,0 +1,19 @@
+# Words that become clickable links everywhere on the site (About, Research, homepage…).
+# Add a line to link a new name. The text must match exactly (capital letters too).
+# Opens in a new tab.
+- { text: "Eva K. Grebel",                     url: "https://de.wikipedia.org/wiki/Eva_Grebel" }
+- { text: "Eva Grebel",                        url: "https://de.wikipedia.org/wiki/Eva_Grebel" }
+- { text: "Astronomisches Rechen-Institut",    url: "https://zah.uni-heidelberg.de/service/personnel/staff-details?tx_zahinfothek_staff%5Buid%5D=1228&cHash=fee5ffa2a438da9f4d8746498a698725" }
+- { text: "ARI",                               url: "https://zah.uni-heidelberg.de/service/personnel/staff-details?tx_zahinfothek_staff%5Buid%5D=1228&cHash=fee5ffa2a438da9f4d8746498a698725" }
+- { text: "Universität Heidelberg",            url: "https://www.uni-heidelberg.de/de" }
+- { text: "Max-Planck-Institut für Astronomie",url: "https://www.mpia.de/de" }
+- { text: "MPIA",                              url: "https://www.mpia.de/de" }
+- { text: "Hector Fellow Academy",             url: "https://hector-fellow-academy.de/en/doctoral-projects/steps-towards-solving-the-enigma-of-multiple-populations-in-star-clusters/" }
+- { text: "IMPRS-HD",                          url: "https://www.imprs-hd.mpg.de/" }
+- { text: "Hector Technology Business School", url: "https://www.hectorschool.kit.edu/" }
+- { text: "KIT",                               url: "https://www.kit.edu/" }
+- { text: "IISER Mohali",                      url: "https://www.iisermohali.ac.in/" }
+- { text: "ESO",                               url: "https://www.eso.org/" }
+- { text: "SDSS-V",                            url: "https://www.sdss.org/" }
+- { text: "4MOST",                             url: "https://www.4most.eu/" }
+- { text: "Gaia",                              url: "https://www.cosmos.esa.int/web/gaia" }

@@ -3,9 +3,14 @@ import Layout from '../layouts/Layout.astro';
 import Sky from '../components/Sky.astro';
 import IconLink from '../components/IconLink.astro';
 import Pic from '../components/Pic.astro';
-import { profile, pubs, research, url } from '../lib/data.js';
+import { profile, pubs, research, url, linkify } from '../lib/data.js';
 import fs from 'node:fs';
 const hasPhoto = fs.existsSync('public' + profile.photo);
+const orgs = [
+  { label: 'Hector Fellow Academy', url: 'https://hector-fellow-academy.de/', icon: 'hector-fellow-academy.de' },
+  { label: 'Hector School, KIT', url: 'https://www.hectorschool.kit.edu/', icon: 'hectorschool.kit.edu' },
+  { label: 'IMPRS-HD', url: 'https://www.imprs-hd.mpg.de/', icon: 'imprs-hd.mpg.de' },
+];
 const stats = [
   { n: pubs.refereed, l: 'peer-reviewed papers' },
   { n: pubs.citations, l: 'citations' },
@@ -16,10 +21,10 @@ const stats = [
 <div class="wrap">
   <section class="hero">
     <div>
-      <p class="eyebrow">{profile.position}</p>
+      <p class="eyebrow" set:html={linkify(profile.position)} />
       <h1 style="margin-top:12px">Hi, I'm {profile.short_name}.</h1>
       <p class="roles" aria-label={`I'm a ${profile.roles.join(', ')}`}>I'm a <span id="role">{profile.roles[0]}</span><i class="caret"></i></p>
-      <p class="lede" style="font-size:17px;color:var(--muted);margin-top:18px;max-width:60ch">{profile.lede}</p>
+      <p class="lede" style="font-size:17px;color:var(--muted);margin-top:18px;max-width:60ch" set:html={linkify(profile.lede)} />
       <span class="open">{profile.status}</span>
       <div class="row" style="margin-top:22px">
         <a class="btn primary" href={url(profile.cv)} target="_blank" rel="noopener">View CV (PDF)</a>
@@ -35,6 +40,8 @@ const stats = [
     </div>
   </section>
 
+  {profile.quote && <blockquote class="quote"><q>{profile.quote}</q><cite>— {profile.quote_source}</cite></blockquote>}
+
   <h2 class="sec">The sky over {profile.location.name} <span class="eyebrow">live</span></h2>
   <Sky />
 
@@ -45,10 +52,11 @@ const stats = [
 
   <h2 class="sec">What I bring to a data team</h2>
   <div class="grid grid4">
-    <div class="card"><h3>Survey-scale data</h3><p>Querying, cross-matching and cleaning heterogeneous catalogues and spectra from SDSS-V (BOSS, APOGEE, LVM), 4MOST, Gaia and VST-STEP.</p><div class="tags"><span class="tag">SQL</span><span class="tag">ADQL</span><span class="tag">pandas</span><span class="tag">astropy</span></div></div>
-    <div class="card"><h3>Inference &amp; optimisation</h3><p>Fitting physical models to noisy data with genetic algorithms and MCMC, and reporting parameters with honest uncertainties.</p><div class="tags"><span class="tag">MCMC</span><span class="tag">GA</span><span class="tag">scipy</span></div></div>
-    <div class="card"><h3>Machine learning</h3><p>Neural-network emulators for spectral fitting, and classification with scikit-learn.</p><div class="tags"><span class="tag">scikit-learn</span><span class="tag">NN emulators</span></div></div>
-    <div class="card"><h3>Communication &amp; business</h3><p>30+ talks and seminars, mentoring of MSc students, and the Hector Technology Business School at KIT.</p><div class="tags"><span class="tag">talks</span><span class="tag">mentoring</span><span class="tag">KIT</span></div></div>
+    <div class="card"><Pic ref="gaia" /><h3>Large-scale data</h3><p set:html={linkify('Querying, cross-matching and cleaning heterogeneous catalogues and spectra from SDSS-V (BOSS, APOGEE, LVM), 4MOST, Gaia and VST-STEP.')} /><div class="tags"><span class="tag">SQL</span><span class="tag">ADQL</span><span class="tag">pandas</span><span class="tag">astropy</span></div></div>
+    <div class="card"><Pic ref="/images/figures/inference.svg" /><h3>Inference &amp; optimisation</h3><p>Fitting physical models to noisy data with genetic algorithms and MCMC, and reporting parameters with honest uncertainties.</p><div class="tags"><span class="tag">MCMC</span><span class="tag">GA</span><span class="tag">scipy</span></div></div>
+    <div class="card"><Pic ref="/images/figures/neuralnet.svg" /><h3>Machine learning</h3><p>Neural-network emulators for spectral fitting, and classification with scikit-learn.</p><div class="tags"><span class="tag">scikit-learn</span><span class="tag">NN emulators</span></div></div>
+    <div class="card"><Pic ref="/images/figures/talk.svg" /><h3>Communication &amp; business</h3><p set:html={linkify('30+ talks and seminars, mentoring of MSc students, and business training at the Hector Technology Business School (KIT) as a Hector Fellow Academy Young Scientist.')} />
+      <div class="orgs">{orgs.map(o => <IconLink label={o.label} href={o.url} icon={o.icon} />)}</div></div>
   </div>
 
   <h2 class="sec">Research in one picture</h2>
