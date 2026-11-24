@@ -1,0 +1,51 @@
+---
+import '../styles/global.css';
+import { profile, fonts, url } from '../lib/data.js';
+const { title, description = profile.lede, current = '' } = Astro.props;
+const [fd, fb] = fonts[profile.font] || fonts['sora-inter'];
+const fam = f => f.replace(/ /g, '+') + ':wght@400;500;600;700';
+const fontHref = `https://fonts.googleapis.com/css2?family=${[...new Set([fd, fb])].map(fam).join('&family=')}&family=JetBrains+Mono:wght@400;500&display=swap`;
+const parts = profile.name.split(' ');
+const mark = parts.slice(0, -1).map(w => w[0] + '.').join(' ') + ' ' + parts.at(-1);
+const nav = [['research','Research'],['projects','Data & ML'],['writing','Writing'],['travel','Travel'],['about','About']];
+---
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover" />
+  <title>{title ? `${title} · ${profile.name}` : profile.name}</title>
+  <meta name="description" content={description} />
+  <meta property="og:title" content={title || profile.name} />
+  <meta property="og:description" content={description} />
+  <meta property="og:image" content={new URL(url(profile.photo), Astro.site)} />
+  <link rel="icon" href={url('/favicon.svg')} type="image/svg+xml" />
+  <link rel="alternate" type="application/rss+xml" title="Writing" href={url('/rss.xml')} />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="stylesheet" href={fontHref} />
+  <style is:inline set:html={`:root{--font-display:"${fd}";--font-body:"${fb}"}`}></style>
+  <script is:inline>try{const t=localStorage.getItem('theme');if(t)document.documentElement.dataset.theme=t}catch(e){}</script>
+</head>
+<body>
+<header class="bar">
+  <div class="wrap">
+    <a class="mark" href={url('/')}><i></i>{mark}</a>
+    <button class="iconbtn" id="menuBtn" aria-expanded="false" aria-controls="nav">Menu</button>
+    <nav class="links" id="nav">
+      {nav.map(([k,l]) => <a href={url('/'+k+'/')} aria-current={current===k ? 'page' : undefined}>{l}</a>)}
+    </nav>
+    <button class="iconbtn" id="themeBtn" title="Switch light or dark" aria-label="Switch light or dark"><svg width="16" height="16" viewBox="0 0 16 16"><circle cx="8" cy="8" r="6.5" fill="none" stroke="currentColor" stroke-width="1.5"/><path d="M8 1.5a6.5 6.5 0 0 1 0 13z" fill="currentColor"/></svg></button>
+  </div>
+</header>
+<main><slot /></main>
+<footer><div class="wrap">
+  <span>© {new Date().getFullYear()} {profile.name} · {profile.location.name}</span>
+  <span>Sky: d3-celestial star data (O. Frohn) and Astronomy Engine. Map: Natural Earth via world-atlas. Image credits are shown on each picture.</span>
+</div></footer>
+<script is:inline>
+const r=document.documentElement;
+document.getElementById('themeBtn').onclick=()=>{const d=r.dataset.theme?r.dataset.theme==='dark':matchMedia('(prefers-color-scheme: dark)').matches;r.dataset.theme=d?'light':'dark';try{localStorage.setItem('theme',r.dataset.theme)}catch(e){}};
+const n=document.getElementById('nav'),m=document.getElementById('menuBtn');m.onclick=()=>{const o=n.classList.toggle('open');m.setAttribute('aria-expanded',o)};
+</script>
+</body>
+</html>

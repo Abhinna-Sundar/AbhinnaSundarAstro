@@ -1,0 +1,61 @@
+---
+import Layout from '../layouts/Layout.astro';
+import Sky from '../components/Sky.astro';
+import IconLink from '../components/IconLink.astro';
+import Pic from '../components/Pic.astro';
+import { profile, pubs, research, url } from '../lib/data.js';
+import fs from 'node:fs';
+const hasPhoto = fs.existsSync('public' + profile.photo);
+const stats = [
+  { n: pubs.refereed, l: 'peer-reviewed papers' },
+  { n: pubs.citations, l: 'citations' },
+  ...profile.stats,
+];
+---
+<Layout>
+<div class="wrap">
+  <section class="hero">
+    <div>
+      <p class="eyebrow">{profile.position}</p>
+      <h1 style="margin-top:12px">Hi, I'm {profile.short_name}.</h1>
+      <p class="roles" aria-label={`I'm a ${profile.roles.join(', ')}`}>I'm a <span id="role">{profile.roles[0]}</span><i class="caret"></i></p>
+      <p class="lede" style="font-size:17px;color:var(--muted);margin-top:18px;max-width:60ch">{profile.lede}</p>
+      <span class="open">{profile.status}</span>
+      <div class="row" style="margin-top:22px">
+        <a class="btn primary" href={url(profile.cv)} target="_blank" rel="noopener">View CV (PDF)</a>
+        <a class="btn" href={url('/projects/')}>Data &amp; ML work</a>
+        <a class="btn" href={url('/about/#contact')}>Contact</a>
+      </div>
+      <div class="iconlinks">{profile.links.map(l => <IconLink label={l.label} href={l.url} icon={l.icon} />)}</div>
+    </div>
+    <div class="portrait">
+      <div class="ring"></div>
+      {hasPhoto ? <img src={url(profile.photo)} alt={`Portrait of ${profile.name}`} /> : <div class="ph">Add your photo at<br/>public/images/me.jpg</div>}
+      <div class="disk"></div>
+    </div>
+  </section>
+
+  <h2 class="sec">The sky over {profile.location.name} <span class="eyebrow">live</span></h2>
+  <Sky />
+
+  <div class="stats" style="margin-top:28px">
+    {stats.map(s => <div><div class="n">{s.n}</div><div class="l">{s.l}</div></div>)}
+    <div class="stats-src">Papers and citations: {pubs.source}, updated {pubs.updated}</div>
+  </div>
+
+  <h2 class="sec">What I bring to a data team</h2>
+  <div class="grid grid4">
+    <div class="card"><h3>Survey-scale data</h3><p>Querying, cross-matching and cleaning heterogeneous catalogues and spectra from SDSS-V (BOSS, APOGEE, LVM), 4MOST, Gaia and VST-STEP.</p><div class="tags"><span class="tag">SQL</span><span class="tag">ADQL</span><span class="tag">pandas</span><span class="tag">astropy</span></div></div>
+    <div class="card"><h3>Inference &amp; optimisation</h3><p>Fitting physical models to noisy data with genetic algorithms and MCMC, and reporting parameters with honest uncertainties.</p><div class="tags"><span class="tag">MCMC</span><span class="tag">GA</span><span class="tag">scipy</span></div></div>
+    <div class="card"><h3>Machine learning</h3><p>Neural-network emulators for spectral fitting, and classification with scikit-learn.</p><div class="tags"><span class="tag">scikit-learn</span><span class="tag">NN emulators</span></div></div>
+    <div class="card"><h3>Communication &amp; business</h3><p>30+ talks and seminars, mentoring of MSc students, and the Hector Technology Business School at KIT.</p><div class="tags"><span class="tag">talks</span><span class="tag">mentoring</span><span class="tag">KIT</span></div></div>
+  </div>
+
+  <h2 class="sec">Research in one picture</h2>
+  <a href={url('/research/')} style="text-decoration:none"><Pic ref={research.hero_image} class="banner" /></a>
+</div>
+<script define:vars={{ roles: profile.roles }}>
+const el=document.getElementById('role'); let i=0;
+if(!matchMedia('(prefers-reduced-motion: reduce)').matches) setInterval(()=>{i=(i+1)%roles.length; el.textContent=roles[i];},2200);
+</script>
+</Layout>

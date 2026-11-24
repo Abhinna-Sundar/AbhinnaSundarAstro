@@ -1,0 +1,11 @@
+about: |
+  I'm from Puri in Odisha. As an army kid I grew up moving between different parts of India, which is probably where the habit of travelling started.
+
+  I studied physics with a specialisation in astronomy at IISER Mohali (BS-MS, 2017–2022), where I was active in the physics and astronomy clubs and coordinated basketball. After research stints at IISER Mohali and ESO, I moved to Heidelberg in 2023 for a PhD at the Astronomisches Rechen-Institut, funded as a Hector Fellow Academy Young Scientist and part of IMPRS-HD.
+
+  Alongside the research I mentor students applying to PhD programmes, and I'm now looking to bring my data skills into industry.
+timeline:
+  - { years: "2023 –",    title: "Doctoral researcher, ARI Heidelberg", sub: "Supervisor Prof. Eva K. Grebel · Hector Fellow · IMPRS-HD" }
+  - { years: "2023",      title: "Graduate researcher, ESO",            sub: "Stellar variability and distance indicators in dSph galaxies" }
+  - { years: "2022 – 23", title: "Graduate researcher, IISER Mohali",   sub: "AstroSat observations of NGC 7469 & IC 5283" }
+  - { years: "2017 – 22", title: "BS-MS Physics, IISER Mohali",          sub: "DST INSPIRE scholar · Academic Achievement Award 2020–22" }

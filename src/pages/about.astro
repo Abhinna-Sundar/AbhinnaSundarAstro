@@ -1,0 +1,36 @@
+---
+import Layout from '../layouts/Layout.astro';
+import IconLink from '../components/IconLink.astro';
+import { profile, about, url } from '../lib/data.js';
+import fs from 'node:fs';
+const hasPhoto = fs.existsSync('public' + profile.photo);
+---
+<Layout title="About" current="about">
+<section><div class="wrap">
+  <div class="about">
+    <div>
+      <div class="page-head" style="margin-bottom:20px"><p class="eyebrow">About</p><h1>Hi, I'm {profile.short_name}.</h1></div>
+      <div class="prose">{about.about.trim().split(/\n\s*\n/).map(p => <p>{p}</p>)}</div>
+    </div>
+    <div>
+      {hasPhoto && <div class="portrait" style="max-width:240px;margin:0 auto 28px"><div class="ring"></div><img src={url(profile.photo)} alt={`Portrait of ${profile.name}`} /></div>}
+      <ul class="tl">{about.timeline.map(t => <li><span class="y">{t.years}</span><div><b>{t.title}</b><span>{t.sub}</span></div></li>)}</ul>
+    </div>
+  </div>
+  <div class="cvbox">
+    <div><p class="eyebrow">Curriculum vitae</p><h3 style="font-size:20px;margin-top:8px">My full CV</h3></div>
+    <div class="row"><a class="btn primary" href={url(profile.cv)} target="_blank" rel="noopener">Open CV (PDF)</a></div>
+  </div>
+  <object data={url(profile.cv)} type="application/pdf" style="width:100%;height:80vh;margin-top:16px;border:1px solid var(--line);border-radius:10px"><p class="note">Your browser can't show the PDF here. <a href={url(profile.cv)}>Open the CV</a>.</p></object>
+  <h2 class="sec" id="contact">Contact</h2>
+  <div class="contact">
+    <span class="email" id="email">{profile.email}</span>
+    <button class="btn" id="copyBtn">Copy email</button>
+  </div>
+  <div class="iconlinks">{profile.links.map(l => <IconLink label={l.label} href={l.url} icon={l.icon} />)}</div>
+</div></section>
+<script is:inline>
+document.getElementById('copyBtn').onclick=e=>{const b=e.currentTarget,t=document.getElementById('email').textContent;
+navigator.clipboard.writeText(t).then(()=>b.textContent='Copied',()=>{const r=document.createRange();r.selectNodeContents(document.getElementById('email'));const s=getSelection();s.removeAllRanges();s.addRange(r);b.textContent='Selected'});setTimeout(()=>b.textContent='Copy email',2000)};
+</script>
+</Layout>

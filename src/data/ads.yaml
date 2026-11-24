@@ -1,0 +1,6 @@
+# How the publication list is pulled from SciX/ADS.
+# The query uses your ORCID (claim your papers at https://scixplorer.org → ORCID)
+# plus your name, so new papers appear even before you claim them.
+query: 'orcid:"0000-0002-0635-2264" OR author:"Samantaray, Abhinna"'
+# Bibcodes to hide (e.g. a different Samantaray). Copy from the SciX URL.
+exclude: []

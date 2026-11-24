@@ -1,0 +1,22 @@
+# Remote pictures downloaded automatically when the site is built on GitHub.
+# id: name used in the other files · url: direct image link · credit: shown under the picture
+- id: ngc330
+  url: "https://cdn.esahubble.org/archives/images/screen/potw2126a.jpg"
+  credit: "ESA/Hubble & NASA, J. Kalirai, A. Milone (CC BY 4.0)"
+  page: "https://esahubble.org/images/potw2126a/"
+  alt: "Hubble image of the young star cluster NGC 330 in the Small Magellanic Cloud"
+- id: clouds-vlt
+  url: "https://cdn.eso.org/images/screen/vltpanomcloudsmilkyway-6068-final-cc.jpg"
+  credit: "M. Claro/ESO (CC BY 4.0)"
+  page: "https://www.eso.org/public/images/vltpanomcloudsmilkyway-6068-final-cc/"
+  alt: "The Magellanic Clouds and the Milky Way above the Very Large Telescope"
+- id: vista
+  url: "https://cdn.eso.org/images/screen/2016_04_06_VISTA_night_Pano-VTversion_CC.jpg"
+  credit: "P. Horálek/ESO (CC BY 4.0)"
+  page: "https://eso.org/public/images/2016_04_06_VISTA_night_Pano-VTversion_CC"
+  alt: "The VISTA telescope at night, future home of 4MOST"
+- id: paranal
+  url: "https://cdn.eso.org/images/screen/dsc0565-cc.jpg"
+  credit: "ESO/A. Ghizzi Panizza (CC BY 4.0)"
+  page: "https://eso.org/public/images/dsc0565-cc"
+  alt: "The Milky Way over the Paranal Observatory"

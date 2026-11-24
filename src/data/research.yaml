@@ -1,0 +1,45 @@
+title: "Be in the Clouds"
+intro: >-
+  My dissertation asks how metallicity, environment and rotation shape the Be
+  phenomenon: rapidly rotating B stars that build a circumstellar decretion disk
+  and show Balmer emission. The Small and Large Magellanic Clouds give
+  metal-poor comparison samples to the Milky Way.
+hero_image: clouds-vlt     # an id from images.yaml, or a path like /images/figures/my-plot.png
+
+# status: live | writing | done   (controls the coloured label)
+projects:
+  - title: "VST–STEP photometry of the SMC"
+    status: writing
+    label: "Papers with supervisor"
+    text: "Be-star content of young star clusters and the field in the Small Magellanic Cloud, including the young massive cluster NGC 330."
+    tags: [photometry, VST-STEP, SMC]
+    image: ngc330
+  - title: "Be stars in SDSS-V spectra"
+    status: live
+    label: "In progress · lead"
+    text: "Finding and characterising Be stars in the LMC and SMC with BOSS, APOGEE and LVM spectroscopy."
+    tags: [SDSS-V, BOSS, LVM]
+    image: /images/figures/halpha-profile.svg
+  - title: "4MOST 1001 Magellanic Clouds"
+    status: live
+    label: "Ongoing · lead"
+    text: "First spectra of Be stars and emission-line objects in the 4MOST Magellanic Cloud survey, including newly found He II emission-line stars."
+    tags: [4MOST, spectroscopy]
+    image: vista
+  - title: "Be stars in Gaia-identified clusters"
+    status: writing
+    label: "Paper in writing"
+    text: "28 star clusters identified with Gaia, searched for Be stars using colour excesses, including the infrared excess from the disk."
+    tags: [Gaia, IR excess]
+    image: /images/figures/be-star.svg
+  - title: "Planetary nebulae with LVM"
+    status: live
+    label: "Ongoing · lead"
+    text: "Census and properties of planetary nebulae in the Magellanic Clouds with the SDSS-V Local Volume Mapper."
+    tags: [LVM, IFU]
+    image: paranal
+  - title: "Before Heidelberg"
+    status: done
+    label: "Earlier work"
+    text: "RR Lyrae and anomalous Cepheids in Draco (ESO, 2023), star formation in NGC 7469/IC 5283 with AstroSat, a solar flare catalogue from Chandrayaan-2 XSM, and magnetic cataclysmic variables."
+    tags: [AstroSat, X-ray, variables]

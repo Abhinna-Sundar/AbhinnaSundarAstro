@@ -1,0 +1,75 @@
+---
+import { travel, url } from '../lib/data.js';
+const T = travel.countries.map(c => ({ ...c, places: c.places.map(p => ({ ...p, photos: (p.photos || []).map(url) })) }));
+---
+<div class="travel">
+  <div class="mapbox" id="mapbox" data-src={url('/data/countries.json')} data-travel={JSON.stringify(T)} data-next={travel.next || ''}><svg id="map" role="img" aria-label="World map of visited countries"></svg><button class="iconbtn" id="mapBack" hidden>← World</button></div>
+  <aside class="panel" id="panel" aria-live="polite"></aside>
+</div>
+<div class="tstats" id="tstats"></div>
+<div class="flags" id="flags"></div>
+<script>
+import * as d3 from 'd3';
+import * as topojson from 'topojson-client';
+(function(){
+const box0=document.getElementById('mapbox');
+const TRAVEL=JSON.parse(box0.dataset.travel); const NEXT=box0.dataset.next;
+const photos=(c,i)=>{const p=c.places[i]; if(!p||!p.photos.length) return ''; return p.photos.map(s=>`<figure class="pic" style="aspect-ratio:3/2"><img src="${s}" alt="${p.name}" loading="lazy"></figure>`).join('');};
+const flag=iso=>iso.replace(/./g,c=>String.fromCodePoint(127397+c.charCodeAt(0)));
+const mapState={ready:false};
+const panel=document.getElementById('panel');
+function worldPanel(){
+  panel.innerHTML=`<p class="eyebrow">Overview</p><h3>${TRAVEL.length} countries</h3><p style="color:var(--muted)">Pick a highlighted country on the map or from the list below.</p>${NEXT?`<p class="eyebrow" style="margin-top:6px">Next stop</p><p>${NEXT}</p>`:''}`;
+}
+function countryPanel(c,selIdx){
+  panel.innerHTML=`<p class="eyebrow">${flag(c.iso)} ${c.places.length} place${c.places.length>1?'s':''}</p><h3>${c.name}</h3><ul class="places">${c.places.map((p,i)=>`<li><button data-i="${i}" aria-pressed="${i===selIdx}"><b>${p.name}</b><span>${p.story}</span></button></li>`).join('')}</ul>${photos(c,selIdx)}`;
+  panel.querySelectorAll('button[data-i]').forEach(b=>b.addEventListener('click',()=>selectPlace(c,+b.dataset.i)));
+}
+function initMap(){
+  if(mapState.started) return; mapState.started=true;
+  worldPanel();
+  const conts=new Set(TRAVEL.map(c=>c.continent||'').filter(Boolean)).size;
+  const places=TRAVEL.reduce((n,c)=>n+c.places.length,0);
+  document.getElementById('tstats').innerHTML=`<div><div class="n">${TRAVEL.length}</div><div class="l">countries</div></div><div><div class="n">${places}</div><div class="l">places</div></div><div><div class="n">${conts}</div><div class="l">continents</div></div>`;
+  document.getElementById('flags').innerHTML=TRAVEL.map(c=>`<button data-id="${c.id}"><span class="f">${flag(c.iso)}</span><span><b style="display:block;font-weight:600">${c.name}</b><span class="c">${c.iso} · ${c.places.length} place${c.places.length>1?'s':''}</span></span></button>`).join('');
+  document.querySelectorAll('#flags button').forEach(b=>b.addEventListener('click',()=>{zoomTo(b.dataset.id);document.getElementById('mapbox').scrollIntoView({behavior:'smooth',block:'center'})}));
+    fetch(box0.dataset.src).then(r=>r.json()).then(topo=>{
+    const box=document.getElementById('mapbox'); const w=box.clientWidth,h=box.clientHeight;
+    const svg=d3.select('#map').attr('viewBox',`0 0 ${w} ${h}`);
+    const feats=topojson.feature(topo,topo.objects.countries).features.filter(f=>f.properties.name!=='Antarctica');
+    const projection=d3.geoNaturalEarth1().fitExtent([[8,8],[w-8,h-8]],{type:'FeatureCollection',features:feats});
+    const path=d3.geoPath(projection);
+    const g=svg.append('g'); const visited=new Set(TRAVEL.map(c=>c.id));
+    g.selectAll('path').data(feats).join('path').attr('d',path).attr('class',d=>'country'+(visited.has(d.id)?' on':''))
+      .on('click',(e,d)=>{if(visited.has(d.id)) zoomTo(d.id);});
+    const pins=g.append('g');
+    const zoom=d3.zoom().scaleExtent([1,40]).on('zoom',e=>{g.attr('transform',e.transform); pins.selectAll('circle').attr('r',5/e.transform.k)});
+    svg.call(zoom).on('wheel.zoom',null);
+    Object.assign(mapState,{ready:true,svg,g,pins,feats,path,projection,zoom,w,h});
+  });
+}
+const back=document.getElementById('mapBack');
+back.addEventListener('click',()=>{const m=mapState; m.svg.transition().duration(700).call(m.zoom.transform,d3.zoomIdentity); m.pins.selectAll('*').remove(); m.g.selectAll('.country').classed('sel',false); back.hidden=true; worldPanel();});
+function zoomTo(id){
+  const m=mapState; const c=TRAVEL.find(t=>t.id===id); if(!m.ready||!c) return;
+  const f=m.feats.find(x=>x.id===id);
+  // bounds from places (handles overseas territories e.g. US/Spain) padded, fall back to feature
+  const pts=c.places.map(p=>m.projection([p.lon,p.lat]));
+  let [[x0,y0],[x1,y1]]=m.path.bounds(f);
+  if(['840','724','380'].includes(id)||pts.length>0){const xs=pts.map(p=>p[0]),ys=pts.map(p=>p[1]);
+    const px0=Math.min(...xs),px1=Math.max(...xs),py0=Math.min(...ys),py1=Math.max(...ys);
+    if(id==='840'||id==='724'){x0=px0-25;x1=px1+25;y0=py0-25;y1=py1+25;}}
+  const k=Math.min(40,0.8/Math.max((x1-x0)/m.w,(y1-y0)/m.h));
+  const t=d3.zoomIdentity.translate(m.w/2,m.h/2).scale(k).translate(-(x0+x1)/2,-(y0+y1)/2);
+  m.svg.transition().duration(800).call(m.zoom.transform,t);
+  m.g.selectAll('.country').classed('sel',d=>d.id===id);
+  m.pins.selectAll('circle').data(c.places).join('circle').attr('class','pin').attr('cx',p=>m.projection([p.lon,p.lat])[0]).attr('cy',p=>m.projection([p.lon,p.lat])[1]).attr('r',5/k)
+    .on('click',(e,p)=>{e.stopPropagation();selectPlace(c,c.places.indexOf(p));}).append('title').text(p=>p.name);
+  back.hidden=false; countryPanel(c,-1);
+}
+function selectPlace(c,i){mapState.pins.selectAll('circle').classed('sel',(p,j)=>j===i); countryPanel(c,i);}
+
+
+initMap();
+})();
+</script>

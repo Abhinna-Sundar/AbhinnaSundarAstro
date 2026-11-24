@@ -1,0 +1,183 @@
+---
+import { profile, url } from '../lib/data.js';
+const home = profile.location;
+---
+<div class="sky" id="sky" data-home={JSON.stringify(home)} data-src={url('/data/sky.json')}>
+      <canvas id="skyCanvas" tabindex="0" aria-label="Live sky map. Drag or use arrow keys to look around."></canvas>
+      <div class="hud">
+        <div class="chip loc" role="group" aria-label="Observing site">
+          <button data-site="hd" aria-pressed="true">{home.name}</button>
+          <button data-site="lco" aria-pressed="false">Las Campanas</button>
+        </div>
+        <div class="chip"><b>Local</b><span id="hTime">--:--</span></div>
+        <div class="chip"><b>LST</b><span id="hLst">--:--</span></div>
+        <div class="chip"><b>Sun</b><span id="hSun">--</span></div>
+        <div class="chip"><b>Moon</b><span id="hMoon">--</span></div>
+        <div class="chip"><b>SMC</b><span id="hSmc">--</span></div>
+      </div>
+      <div class="skyctl">
+        <button id="nowBtn">Now</button>
+        <button id="tonightBtn">Tonight</button>
+        <input type="range" id="tSlider" min="-12" max="24" step="0.25" value="0" aria-label="Hours from now">
+        <span id="tOff" class="mono">+0.0 h</span>
+        <button id="linesBtn" aria-pressed="true">Lines</button>
+        <span class="skyhint">drag to look around</span>
+      </div>
+    
+<script>
+import * as Astronomy from 'astronomy-engine';
+window.Astronomy = Astronomy;
+(function(){
+
+const home=JSON.parse(document.getElementById('sky').dataset.home);
+const SITES={hd:home,
+             lco:{name:'Las Campanas',lat:-29.0146,lon:-70.6926,elev:2380,tz:'America/Santiago'}};
+const CLOUDS=[{n:'LMC',ra:80.89,dec:-69.76,r:5},{n:'SMC',ra:13.19,dec:-72.83,r:2.5}];
+let site=SITES.hd, az0=180, alt0=22, offH=0, showLines=true, sky=null;
+const cv=document.getElementById('skyCanvas'), ctx=cv.getContext('2d');
+const D=Math.PI/180;
+let W=0,H=0,dpr=1;
+function sizeSky(){const r=cv.getBoundingClientRect(); if(!r.width) return; dpr=Math.min(2,devicePixelRatio||1); W=r.width;H=r.height; cv.width=W*dpr; cv.height=H*dpr; ctx.setTransform(dpr,0,0,dpr,0,0); drawSky();}
+new ResizeObserver(sizeSky).observe(document.getElementById('sky'));
+
+function bvColor(bv){ // B-V to rgb, rough blackbody ramp
+  const t=Math.max(-0.4,Math.min(2,bv));
+  let r,g,b;
+  if(t<0){r=170+t*80;g=195+t*60;b=255}
+  else if(t<0.6){r=170+t*140;g=195+t*90;b=255-t*40}
+  else if(t<1.4){r=255;g=249-(t-0.6)*90;b=231-(t-0.6)*150}
+  else {r=255;g=177-(t-1.4)*60;b=111-(t-1.4)*60}
+  return `${r|0},${g|0},${b|0}`;
+}
+function frame(){
+  const a=az0*D,h=alt0*D;
+  const d=[Math.sin(a)*Math.cos(h),Math.cos(a)*Math.cos(h),Math.sin(h)];
+  const r=[Math.cos(a),-Math.sin(a),0];
+  const u=[r[1]*d[2]-r[2]*d[1], r[2]*d[0]-r[0]*d[2], r[0]*d[1]-r[1]*d[0]];
+  const fov=(W<600?95:115)*D; const s=(W/2)/(2*Math.tan(fov/4));
+  return {d,r,u,s,cx:W/2,cy:H*0.46};
+}
+function proj(F,p){const c=p[0]*F.d[0]+p[1]*F.d[1]+p[2]*F.d[2]; if(c<-0.2) return null; const k=2/(1+c);
+  return [F.cx+F.s*k*(p[0]*F.r[0]+p[1]*F.r[1]+p[2]*F.r[2]), F.cy-F.s*k*(p[0]*F.u[0]+p[1]*F.u[1]+p[2]*F.u[2])];}
+function hv(alt,az){return [Math.sin(az*D)*Math.cos(alt*D),Math.cos(az*D)*Math.cos(alt*D),Math.sin(alt*D)];}
+function eqToH(ra,dec,lst,lat){ // returns [E,N,U]
+  const ha=(lst-ra)*D, de=dec*D, la=lat*D;
+  const cd=Math.cos(de), sd=Math.sin(de);
+  return [-cd*Math.sin(ha), sd*Math.cos(la)-cd*Math.sin(la)*Math.cos(ha), sd*Math.sin(la)+cd*Math.cos(la)*Math.cos(ha)];
+}
+function fmtHM(deg){deg=((deg%360)+360)%360;const h=deg/15;return String(Math.floor(h)).padStart(2,'0')+':'+String(Math.floor((h%1)*60)).padStart(2,'0')}
+function ridge(az){return 1.1+0.7*Math.sin(az*D*3+1)+0.45*Math.sin(az*D*7+2)+0.25*Math.sin(az*D*17)}
+
+function drawSky(){
+  if(!W) return;
+  const date=new Date(Date.now()+offH*3600e3);
+  const jd=date.getTime()/86400000+2440587.5;
+  const gmst=(280.46061837+360.98564736629*(jd-2451545))%360;
+  const lst=gmst+site.lon;
+  const F=frame();
+  let sunAlt=-30, moon=null, bodies=[];
+  const A=window.Astronomy;
+  if(A){
+    const obs=new A.Observer(site.lat,site.lon,site.elev);
+    const pos=b=>{const e=A.Equator(b,date,obs,true,true);return A.Horizon(date,obs,e.ra,e.dec,'normal');};
+    sunAlt=pos('Sun').altitude;
+    const mh=pos('Moon'); const ill=A.Illumination('Moon',date).phase_fraction;
+    moon={alt:mh.altitude,az:mh.azimuth,ill};
+    for(const b of ['Mercury','Venus','Mars','Jupiter','Saturn']){const h=pos(b);bodies.push({n:b,alt:h.altitude,az:h.azimuth});}
+  }
+  // sky gradient by sun altitude
+  const night=Math.max(0,Math.min(1,(-sunAlt-0)/18));
+  const top=`rgb(${lerp(70,4,night)},${lerp(118,7,night)},${lerp(190,16,night)})`;
+  const hor=`rgb(${lerp(150,14,night)},${lerp(185,22,night)},${lerp(225,44,night)})`;
+  const g=ctx.createLinearGradient(0,0,0,H); g.addColorStop(0,top); g.addColorStop(0.75,hor);
+  ctx.fillStyle=g; ctx.fillRect(0,0,W,H);
+  const starVis=Math.max(0.12,night);
+
+  // constellation lines
+  if(sky && showLines){
+    ctx.strokeStyle=`rgba(140,170,230,${0.28*starVis})`; ctx.lineWidth=0.8; ctx.beginPath();
+    for(const seg of sky.lines){let prev=null;
+      for(const [ra,dec] of seg){const p=eqToH(ra,dec,lst,site.lat); const q=p[2]>-0.05?proj(F,p):null;
+        if(q&&prev){ctx.moveTo(prev[0],prev[1]);ctx.lineTo(q[0],q[1]);} prev=q;}
+    }
+    ctx.stroke();
+  }
+  // stars
+  if(sky){
+    for(const [ra,dec,mag,bv] of sky.stars){const p=eqToH(ra,dec,lst,site.lat); if(p[2]<0) continue;
+      const q=proj(F,p); if(!q||q[0]<-5||q[0]>W+5||q[1]<-5||q[1]>H+5) continue;
+      const ext=Math.min(1,p[2]/0.12);
+      const rad=Math.max(0.45,(5.8-mag)*0.42);
+      ctx.fillStyle=`rgba(${bvColor(bv)},${Math.min(1,(0.35+(5.8-mag)*0.14))*ext*starVis})`;
+      ctx.beginPath();ctx.arc(q[0],q[1],rad,0,7);ctx.fill();
+    }
+    ctx.font='500 10.5px "JetBrains Mono",monospace'; ctx.fillStyle=`rgba(200,212,235,${0.75*starVis})`;
+    for(const [n,ra,dec] of sky.named){const p=eqToH(ra,dec,lst,site.lat); if(p[2]<0.03) continue; const q=proj(F,p); if(q) ctx.fillText(n,q[0]+6,q[1]-5);}
+    if(showLines){ctx.font='500 10px "JetBrains Mono",monospace'; ctx.fillStyle=`rgba(140,170,230,${0.55*starVis})`;
+      for(const [n,ra,dec] of sky.labels){const p=eqToH(ra,dec,lst,site.lat); if(p[2]<0.08) continue; const q=proj(F,p); if(q) ctx.fillText(n.toUpperCase(),q[0],q[1]);}}
+  }
+  // Magellanic Clouds reticles
+  const gold='230,192,105';
+  for(const c of CLOUDS){const p=eqToH(c.ra,c.dec,lst,site.lat); if(p[2]<0) continue; const q=proj(F,p); if(!q) continue;
+    const rr=Math.max(10,F.s*c.r*D*1.1);
+    ctx.strokeStyle=`rgba(${gold},.9)`; ctx.lineWidth=1.2; ctx.setLineDash([4,4]); ctx.beginPath(); ctx.arc(q[0],q[1],rr,0,7); ctx.stroke(); ctx.setLineDash([]);
+    ctx.beginPath(); for(const k of [0,90,180,270]){const a=k*D; ctx.moveTo(q[0]+Math.cos(a)*(rr+3),q[1]+Math.sin(a)*(rr+3)); ctx.lineTo(q[0]+Math.cos(a)*(rr+9),q[1]+Math.sin(a)*(rr+9));} ctx.stroke();
+    ctx.fillStyle=`rgba(${gold},1)`; ctx.font='600 11px "JetBrains Mono",monospace'; ctx.fillText(c.n+' · my thesis targets',q[0]+rr+12,q[1]+4);
+  }
+  // planets + moon
+  ctx.font='500 10.5px "JetBrains Mono",monospace';
+  for(const b of bodies){ if(b.alt<0) continue; const q=proj(F,hv(b.alt,b.az)); if(!q) continue;
+    ctx.fillStyle='rgba(255,236,200,.95)'; ctx.beginPath(); ctx.arc(q[0],q[1],2.6,0,7); ctx.fill(); ctx.fillStyle='rgba(255,226,170,.85)'; ctx.fillText(b.n,q[0]+6,q[1]+4);}
+  if(moon && moon.alt>-1){const q=proj(F,hv(moon.alt,moon.az)); if(q){
+    ctx.fillStyle='rgba(60,66,84,1)'; ctx.beginPath(); ctx.arc(q[0],q[1],8,0,7); ctx.fill();
+    ctx.save(); ctx.beginPath(); ctx.arc(q[0],q[1],8,0,7); ctx.clip(); ctx.fillStyle='#f1ecdf';
+    ctx.beginPath(); ctx.arc(q[0]+16*(1-moon.ill)-0, q[1], 8+ (moon.ill<0.5?0:0),0,7); ctx.fill();
+    if(moon.ill>0.98){ctx.beginPath();ctx.arc(q[0],q[1],8,0,7);ctx.fill();}
+    ctx.restore(); ctx.fillStyle='rgba(241,236,223,.9)'; ctx.fillText('Moon',q[0]+12,q[1]+4);}}
+
+  // ground with ridge
+  ctx.beginPath(); let started=false;
+  for(let a=az0-100;a<=az0+100;a+=1.5){const q=proj(F,hv(ridge(a),a)); if(!q) continue; if(!started){ctx.moveTo(q[0],q[1]);started=true;} else ctx.lineTo(q[0],q[1]);}
+  ctx.lineTo(W+50,H+50); ctx.lineTo(-50,H+50); ctx.closePath();
+  ctx.fillStyle=`rgb(${lerp(28,3,night)},${lerp(36,5,night)},${lerp(44,10,night)})`; ctx.fill();
+  // cardinal labels
+  ctx.fillStyle='rgba(200,212,235,.8)'; ctx.font='600 12px "JetBrains Mono",monospace'; ctx.textAlign='center';
+  [['N',0],['NE',45],['E',90],['SE',135],['S',180],['SW',225],['W',270],['NW',315]].forEach(([n,a])=>{const q=proj(F,hv(-4,a)); if(q&&q[0]>0&&q[0]<W) ctx.fillText(n,q[0],q[1]);});
+  ctx.textAlign='left';
+
+  // HUD
+  const tf=new Intl.DateTimeFormat('en-GB',{timeZone:site.tz,hour:'2-digit',minute:'2-digit'});
+  document.getElementById('hTime').textContent=tf.format(date);
+  document.getElementById('hLst').textContent=fmtHM(lst);
+  document.getElementById('hSun').textContent=(sunAlt>=0?'+':'')+sunAlt.toFixed(0)+'°'+(sunAlt>0?' · day':sunAlt>-18?' · twilight':' · night');
+  document.getElementById('hMoon').textContent=moon?`${Math.round(moon.ill*100)}% · ${moon.alt>0?'up':'down'}`:'n/a';
+  const smc=CLOUDS[1]; const pa=eqToH(smc.ra,smc.dec,lst,site.lat); const maxAlt=90-Math.abs(site.lat-smc.dec);
+  document.getElementById('hSmc').textContent= maxAlt<0?'never rises here':`${(Math.asin(pa[2])/D).toFixed(0)}°`;
+}
+function lerp(a,b,t){return Math.round(a+(b-a)*t)}
+
+// interaction
+let drag=null;
+cv.addEventListener('pointerdown',e=>{drag={x:e.clientX,y:e.clientY,az:az0,alt:alt0};cv.setPointerCapture(e.pointerId)});
+cv.addEventListener('pointermove',e=>{if(!drag) return; const F=frame(); const k=1/F.s/D;
+  az0=(drag.az-(e.clientX-drag.x)*k*0.55+360)%360; alt0=Math.max(5,Math.min(70,drag.alt+(e.clientY-drag.y)*k*0.55)); drawSky();});
+cv.addEventListener('pointerup',()=>drag=null); cv.addEventListener('pointercancel',()=>drag=null);
+cv.addEventListener('keydown',e=>{const m={ArrowLeft:-8,ArrowRight:8}; if(m[e.key]!=null){az0=(az0+m[e.key]+360)%360;drawSky();e.preventDefault();}
+  if(e.key==='ArrowUp'){alt0=Math.min(70,alt0+5);drawSky();e.preventDefault()} if(e.key==='ArrowDown'){alt0=Math.max(5,alt0-5);drawSky();e.preventDefault()}});
+document.querySelectorAll('[data-site]').forEach(b=>b.addEventListener('click',()=>{
+  site=SITES[b.dataset.site]; offH=0; document.querySelectorAll('[data-site]').forEach(x=>x.setAttribute('aria-pressed',x===b));
+  az0= site.lat<0?180:180; if(b.dataset.site==='lco'){az0=180;alt0=30;} else {alt0=22;} const t=tonight(); setOff(t);}));
+const slider=document.getElementById('tSlider'), tOff=document.getElementById('tOff');
+slider.addEventListener('input',()=>{offH=+slider.value; tOff.textContent=(offH>=0?'+':'')+offH.toFixed(1)+' h'; drawSky();});
+function setOff(h){offH=h;slider.value=h;tOff.textContent=(h>=0?'+':'')+h.toFixed(1)+' h';drawSky();}
+function tonight(){const A=window.Astronomy; if(!A) return 0; const obs=new A.Observer(site.lat,site.lon,site.elev);
+  for(let h=0;h<=24;h+=0.25){const d=new Date(Date.now()+h*3600e3); const e=A.Equator('Sun',d,obs,true,true); if(A.Horizon(d,obs,e.ra,e.dec,'normal').altitude<-15) return h+0.5;} return 0;}
+document.getElementById('tonightBtn').addEventListener('click',()=>setOff(tonight()));
+document.getElementById('nowBtn').addEventListener('click',()=>{offH=0;slider.value=0;tOff.textContent='+0.0 h';drawSky();});
+const lb=document.getElementById('linesBtn'); lb.addEventListener('click',()=>{showLines=!showLines;lb.setAttribute('aria-pressed',showLines);drawSky();});
+setInterval(drawSky,30000);
+fetch(document.getElementById('sky').dataset.src).then(r=>r.json()).then(j=>{sky=j; const t=tonight(); if(t>0) setOff(t); else drawSky();}).catch(()=>{});
+
+
+})();
+</script>

@@ -1,0 +1,45 @@
+# ── Who you are ─────────────────────────────────────────────
+# Edit any text between the quotes. Save, commit, push: the site rebuilds.
+name: "Abhinna Sundar Samantaray"
+short_name: "Abhinna"
+pronouns: "he/him"
+position: "PhD researcher · ARI, Universität Heidelberg"
+# Put your photo at public/images/me.jpg (square, at least 800×800 px).
+photo: "/images/me.jpg"
+# Rotating words in the homepage headline ("I'm a …")
+roles:
+  - "astrophysicist"
+  - "data scientist"
+  - "Python developer"
+  - "science communicator"
+  - "traveller"
+lede: >-
+  I work with large astronomical survey datasets (SDSS-V, 4MOST, Gaia, VST-STEP)
+  to find and characterise Be stars in the Magellanic Clouds and the Milky Way.
+  Day to day that means Python pipelines, statistical inference and machine
+  learning on large spectroscopic and photometric datasets.
+status: "Open to data science & AI roles"
+email: "abhinna.samantaray@uni-heidelberg.de"
+cv: "/cv.pdf"
+orcid: "0000-0002-0635-2264"
+# Where you are based: used by the live sky on the homepage
+location: { name: "Heidelberg", lat: 49.398, lon: 8.672, elev: 120, tz: "Europe/Berlin" }
+
+# Profile links. "icon" is the website whose small logo is shown next to the label.
+links:
+  - { label: "SciX / ADS",     url: "https://scixplorer.org/search?q=orcid%3A0000-0002-0635-2264&sort=date%20desc", icon: "scixplorer.org" }
+  - { label: "Google Scholar", url: "https://scholar.google.com/citations?user=y0Nnf50AAAAJ", icon: "scholar.google.com" }
+  - { label: "ORCID",          url: "https://orcid.org/0000-0002-0635-2264", icon: "orcid.org" }
+  - { label: "GitHub",         url: "https://github.com/Abhinna-Sundar", icon: "github.com" }
+  - { label: "LinkedIn",       url: "https://www.linkedin.com/in/abhinna-sundar-samantaray-b23733156", icon: "linkedin.com" }
+  - { label: "Instagram",      url: "https://www.instagram.com/abhinna_sundar/", icon: "instagram.com" }
+
+# Headline numbers on the homepage. Citations and papers are overwritten
+# automatically from SciX/ADS when the weekly update runs.
+stats:
+  - { n: "30+", l: "talks & seminars" }
+  - { n: "3",   l: "survey projects led" }
+
+# Fonts: pick one of  sora-inter | space-grotesk-plex | fraunces-inter |
+#        instrument | dm | outfit-manrope | jakarta | syne-inter
+font: "sora-inter"

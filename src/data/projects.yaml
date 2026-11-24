@@ -1,0 +1,35 @@
+intro: >-
+  Each case: what the data were, what I built, and what came out. The same
+  methods carry over to forecasting, anomaly detection and customer or sensor data.
+cases:
+  - title: "Neural-network spectral fitting at scale"
+    image: /images/figures/pipeline.svg
+    problem: "Estimate stellar parameters for many OB/Be stars from spectra, where a full model grid is too slow to evaluate per star."
+    method: "Neural-network spectral emulator (SpecFANN). A genetic algorithm (500 generations, population 50) finds a starting point, then MCMC (50 walkers × 5000 steps) samples the posterior. Runs in batch over lists of Gaia sources."
+    output: "Per-star parameter posteriors, saved per source for downstream analysis."
+    tags: [Python, neural nets, MCMC, genetic algorithm]
+    repo: ""      # paste a GitHub link here
+    todo: "Add: repo link, number of stars processed, runtime per star"
+  - title: "Automated solar-flare detection"
+    image: /images/figures/lightcurve.svg
+    problem: "Find faint, sub-A-class flares in three years of Chandrayaan-2 XSM X-ray light curves."
+    method: "Automatic identification of flare events in long time series."
+    output: "A published flare catalogue (Solar Physics, 2024)."
+    tags: [time series, event detection]
+    repo: ""
+    todo: "Add: your part of the pipeline, catalogue size"
+  - title: "Finding rare objects in survey catalogues"
+    image: /images/figures/be-star.svg
+    problem: "Pick out Be and other emission-line stars from large photometric and spectroscopic surveys."
+    method: "Colour and emission excess selection, cross-matching across VST-STEP, Gaia, SDSS-V and 4MOST, followed by spectroscopic confirmation."
+    output: "Be-star samples in clusters and field across three galaxies; discovery of three new He II emission-line stars in the LMC."
+    tags: [classification, cross-match, SQL/ADQL]
+    repo: ""
+    todo: "Add: sample sizes, precision of selection"
+toolkit:
+  - { title: "Programming", tags: [Python, numpy, scipy, pandas, matplotlib, astropy, scikit-learn, "C / C++", SQL, ADQL, LaTeX] }
+  - { title: "Data sources", tags: [SDSS-V, 4MOST, Gaia, VST-STEP, AstroSat, HST proposal] }
+business: >-
+  Hector Technology Business School, KIT: data analytics & information systems (2024),
+  communication & negotiation (2025), finance (2025), markets incl. data science (2025),
+  operations with a BOSCH site visit (2026).

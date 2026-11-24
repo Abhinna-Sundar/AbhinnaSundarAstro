@@ -1,0 +1,139 @@
+{
+ "source": "CV (Nov 2026)",
+ "updated": "2026-11-24",
+ "citations": 152,
+ "h_index": 3,
+ "refereed": 8,
+ "papers": [
+  {
+   "title": "Massive stars in the SDSS-V survey: two O2-like sources in the LMC",
+   "authors": "Roman-Lopez, A., et al. incl. Samantaray, A.S.",
+   "first": false,
+   "year": 2026,
+   "pub": "A&A 714, L3",
+   "status": "published",
+   "url": "https://scixplorer.org/search?q=title%3A%22Massive%20stars%20in%20the%20SDSS-V%20survey%3A%20two%20O2-like%20sources%20in%20the%20LMC%22",
+   "citations": null
+  },
+  {
+   "title": "The Nineteenth Data Release of the Sloan Digital Sky Survey",
+   "authors": "SDSS Collaboration incl. Samantaray, A.S.",
+   "first": false,
+   "year": 2025,
+   "pub": "ApJS",
+   "status": "published",
+   "url": "https://scixplorer.org/search?q=title%3A%22The%20Nineteenth%20Data%20Release%20of%20the%20Sloan%20Digital%20Sky%20Survey%22",
+   "citations": null
+  },
+  {
+   "title": "AstroSat observations of interacting galaxies NGC 7469 and IC 5283",
+   "authors": "Samantaray, A.S., Jassal, H.K., et al.",
+   "first": true,
+   "year": 2024,
+   "pub": "A&A 686, A241",
+   "status": "published",
+   "url": "https://scixplorer.org/search?q=title%3A%22AstroSat%20observations%20of%20interacting%20galaxies%20NGC%207469%20and%20IC%205283%22",
+   "citations": null
+  },
+  {
+   "title": "Solar Flare Catalogue from 3 Years of Chandrayaan-2 XSM Observations",
+   "authors": "Valluvan, A., et al. incl. Samantaray, A.S.",
+   "first": false,
+   "year": 2024,
+   "pub": "Solar Physics 299",
+   "status": "published",
+   "url": "https://scixplorer.org/search?q=title%3A%22Solar%20Flare%20Catalogue%20from%203%20Years%20of%20Chandrayaan-2%20XSM%20Observations%22",
+   "citations": null
+  },
+  {
+   "title": "Stellar Variability and Distance Indicators in Nearby Galaxies. I. RR Lyrae and Anomalous Cepheids in Draco",
+   "authors": "Bhardwaj, A., et al. incl. Samantaray, A.S.",
+   "first": false,
+   "year": 2024,
+   "pub": "AJ 167, 247",
+   "status": "published",
+   "url": "https://scixplorer.org/search?q=title%3A%22Stellar%20Variability%20and%20Distance%20Indicators%20in%20Nearby%20Galaxies.%20I.%20RR%20Lyrae%20and%20Anomalous%20Cepheids%20in%20Draco%22",
+   "citations": null
+  },
+  {
+   "title": "Be in the Clouds: The role of cluster age, mass, metallicity, and environment in Be star formation",
+   "authors": "Samantaray, A.S., Grebel, E., et al.",
+   "first": true,
+   "year": 2026,
+   "pub": "Bull. Soc. Roy. Sci. Liège, forthcoming",
+   "status": "forthcoming",
+   "url": "https://scixplorer.org/search?q=title%3A%22Be%20in%20the%20Clouds%3A%20The%20role%20of%20cluster%20age%2C%20mass%2C%20metallicity%2C%20and%20environment%20in%20Be%20star%20formation%22",
+   "citations": null
+  },
+  {
+   "title": "Local Volume Mapper measurements of plasma temperatures in the Lagoon Nebula",
+   "authors": "Singh, A., et al. incl. Samantaray, A.S.",
+   "first": false,
+   "year": 2026,
+   "pub": "ApJ, accepted",
+   "status": "forthcoming",
+   "url": "https://scixplorer.org/search?q=title%3A%22Local%20Volume%20Mapper%20measurements%20of%20plasma%20temperatures%20in%20the%20Lagoon%20Nebula%22",
+   "citations": null
+  },
+  {
+   "title": "VST–STEP survey V. Be content in young star clusters in the Small Magellanic Cloud",
+   "authors": "Samantaray, A.S., Gatto, M., Grebel, E., et al.",
+   "first": true,
+   "year": 2026,
+   "pub": "to be submitted, A&A",
+   "status": "prep",
+   "url": "https://scixplorer.org/search?q=title%3A%22VST%E2%80%93STEP%20survey%20V.%20Be%20content%20in%20young%20star%20clusters%20in%20the%20Small%20Magellanic%20Cloud%22",
+   "citations": null
+  },
+  {
+   "title": "VST–STEP survey IV. Be stars in the young massive cluster NGC 330",
+   "authors": "Samantaray, A.S., Grebel, E., et al.",
+   "first": true,
+   "year": 2026,
+   "pub": "to be submitted, A&A",
+   "status": "prep",
+   "url": "https://scixplorer.org/search?q=title%3A%22VST%E2%80%93STEP%20survey%20IV.%20Be%20stars%20in%20the%20young%20massive%20cluster%20NGC%20330%22",
+   "citations": null
+  },
+  {
+   "title": "Be phenomenon in Galactic open clusters",
+   "authors": "Samantaray, A.S., Kalsi, A., et al.",
+   "first": true,
+   "year": 2026,
+   "pub": "to be submitted, A&A",
+   "status": "prep",
+   "url": "https://scixplorer.org/search?q=title%3A%22Be%20phenomenon%20in%20Galactic%20open%20clusters%22",
+   "citations": null
+  },
+  {
+   "title": "Discovery of three new He II emission-line stars in the LMC with 4MOST",
+   "authors": "Sander, A.A.C., Samantaray, A.S., et al.",
+   "first": false,
+   "year": 2026,
+   "pub": "to be submitted, A&A Letters",
+   "status": "prep",
+   "url": "https://scixplorer.org/search?q=title%3A%22Discovery%20of%20three%20new%20He%20II%20emission-line%20stars%20in%20the%20LMC%20with%204MOST%22",
+   "citations": null
+  },
+  {
+   "title": "The Twentieth Data Release of the Sloan Digital Sky Survey",
+   "authors": "SDSS Collaboration incl. Samantaray, A.S.",
+   "first": false,
+   "year": 2026,
+   "pub": "submitted, ApJS",
+   "status": "prep",
+   "url": "https://scixplorer.org/search?q=title%3A%22The%20Twentieth%20Data%20Release%20of%20the%20Sloan%20Digital%20Sky%20Survey%22",
+   "citations": null
+  },
+  {
+   "title": "Untangling binary star systems with single-epoch APOGEE spectra",
+   "authors": "Seeburger, R., et al. incl. Samantaray, A.S.",
+   "first": false,
+   "year": 2026,
+   "pub": "submitted, MNRAS",
+   "status": "prep",
+   "url": "https://scixplorer.org/search?q=title%3A%22Untangling%20binary%20star%20systems%20with%20single-epoch%20APOGEE%20spectra%22",
+   "citations": null
+  }
+ ]
+}

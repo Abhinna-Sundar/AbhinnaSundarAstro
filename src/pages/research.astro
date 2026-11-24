@@ -1,0 +1,49 @@
+---
+import Layout from '../layouts/Layout.astro';
+import Pic from '../components/Pic.astro';
+import IconLink from '../components/IconLink.astro';
+import { research, pubs, manualPapers, profile } from '../lib/data.js';
+const st = { live: 'st-live', writing: 'st-wr', done: 'st-done' };
+const published = pubs.papers.filter(p => p.status === 'published');
+const other = pubs.papers.filter(p => p.status !== 'published' && p.status !== 'prep' && p.status !== 'forthcoming');
+const scixSearch = t => 'https://scixplorer.org/search?q=' + encodeURIComponent(`title:"${t}"`);
+const scix = profile.links.find(l => l.icon === 'scixplorer.org');
+---
+<Layout title="Research" current="research">
+<section><div class="wrap">
+  <Pic ref={research.hero_image} class="banner" />
+  <div class="page-head">
+    <p class="eyebrow">Research</p>
+    <h1>{research.title}</h1>
+    <p>{research.intro}</p>
+  </div>
+  <div class="grid">
+    {research.projects.map(p => (
+      <div class="card">
+        {p.image && <Pic ref={p.image} />}
+        <span class={`status ${st[p.status]}`}>{p.label}</span>
+        <h3>{p.title}</h3><p>{p.text}</p>
+        <div class="tags">{p.tags.map(t => <span class="tag">{t}</span>)}</div>
+      </div>))}
+  </div>
+
+  <h2 class="sec">Publications <span class="eyebrow">refereed · {pubs.citations} citations · h-index {pubs.h_index}</span></h2>
+  <div class="iconlinks" style="margin:-4px 0 16px"><IconLink label="All my papers on SciX" href={scix.url} icon="scixplorer.org" /></div>
+  <ul class="pubs">
+    {published.map(p => (
+      <li><span class="yr">{p.year}</span>
+        <div><div class="t"><a href={p.url} target="_blank" rel="noopener">{p.title} ↗</a>{p.first && <span class="first">1st author</span>}</div><div class="a">{p.authors} · <i>{p.pub}</i></div></div>
+        <span class="cit">{p.citations != null ? `${p.citations} cit.` : ''}</span></li>))}
+  </ul>
+  {other.length > 0 && <>
+    <h2 class="sec">Proceedings &amp; preprints</h2>
+    <ul class="pubs">{other.map(p => <li><span class="yr">{p.year}</span><div><div class="t"><a href={p.url} target="_blank" rel="noopener">{p.title} ↗</a></div><div class="a">{p.authors} · <i>{p.pub}</i></div></div><span class="cit">{p.citations ? `${p.citations} cit.` : ''}</span></li>)}</ul>
+  </>}
+  <p class="note">Source: {pubs.source}. Last updated {pubs.updated}. The list refreshes every week.</p>
+
+  <h2 class="sec">Submitted &amp; in preparation</h2>
+  <ul class="pubs">
+    {manualPapers.map(p => <li><span class="yr">{p.year}</span><div><div class="t">{p.title}{p.first && <span class="first">1st author</span>}</div><div class="a">{p.authors} · <i>{p.pub}</i></div></div><span></span></li>)}
+  </ul>
+</div></section>
+</Layout>

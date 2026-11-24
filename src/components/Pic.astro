@@ -1,0 +1,15 @@
+---
+import { img } from '../lib/data.js';
+const { ref, class: cls = '', alt = '' } = Astro.props;
+const i = img(ref);
+---
+{i && i.src ? (
+  <figure class={`pic ${cls}`}>
+    <img src={i.src} alt={i.alt || alt} loading="lazy" />
+    {i.credit && <figcaption>{i.page ? <a href={i.page} target="_blank" rel="noopener">{i.credit}</a> : i.credit}</figcaption>}
+  </figure>
+) : (
+  <figure class={`pic missing ${cls}`} aria-hidden="true">
+    {i?.credit && <figcaption>{i.credit}</figcaption>}
+  </figure>
+)}

@@ -1,0 +1,19 @@
+{
+  "name": "abhinna-website",
+  "type": "module",
+  "private": true,
+  "scripts": {
+    "dev": "astro dev",
+    "build": "astro build",
+    "preview": "astro preview",
+    "fetch:pubs": "node scripts/fetch-pubs.mjs",
+    "fetch:images": "node scripts/fetch-images.mjs"
+  },
+  "dependencies": {
+    "astro": "5.18.2",
+    "astronomy-engine": "2.1.19",
+    "d3": "7.9.0",
+    "js-yaml": "4.1.0",
+    "topojson-client": "3.1.0"
+  }
+}

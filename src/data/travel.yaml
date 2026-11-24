@@ -1,0 +1,81 @@
+# ── Travel ──────────────────────────────────────────────────
+# One entry per country. "id" is the ISO numeric code (find yours at
+# https://en.wikipedia.org/wiki/ISO_3166-1_numeric), "iso" the 2-letter code.
+# Each place: name, lat/lon (right-click in Google Maps → copy coordinates),
+# a short story, and optional photos placed in public/images/travel/, e.g.
+#   photos: [/images/travel/lausanne-1.jpg]
+# continent: Europe | Asia | Africa | North America | South America | Oceania | Antarctica
+# Seeded from the CV; add the other countries from your Instagram highlights.
+next: "Santiago, Chile · MWM-LVM workshop, Jan 2027"
+countries:
+  - id: "276"
+    iso: DE
+    continent: Europe
+    name: Germany
+    places:
+      - { name: Heidelberg, lat: 49.40, lon: 8.69, story: "Home base since 2023: PhD at the Astronomisches Rechen-Institut." }
+      - { name: Garching, lat: 48.26, lon: 11.67, story: "Graduate research at ESO, Apr–Aug 2023." }
+      - { name: Potsdam, lat: 52.39, lon: 13.06, story: "4MOST meetings (2026) and the jAG summer school (2025)." }
+      - { name: Hamburg, lat: 53.55, lon: 9.99, story: "Hector Fellow Academy Symposium, Jul 2024." }
+      - { name: Karlsruhe, lat: 49.01, lon: 8.40, story: "Hector Technology Business School modules at KIT." }
+      - { name: Konstanz, lat: 47.66, lon: 9.18, story: "Hector Young Researchers Meet, Oct 2024." }
+      - { name: Düsseldorf, lat: 51.23, lon: 6.77, story: "Hector Fellow Academy Symposium, Jul 2025." }
+      - { name: Wernau, lat: 48.69, lon: 9.42, story: "Operations module and a BOSCH site visit, May 2026." }
+  - id: "356"
+    iso: IN
+    continent: Asia
+    name: India
+    places:
+      - { name: Puri, lat: 19.81, lon: 85.83, story: "Hometown, in Odisha." }
+      - { name: Mohali, lat: 30.70, lon: 76.72, story: "BS-MS at IISER Mohali, 2017–2022." }
+      - { name: Bengaluru, lat: 12.97, lon: 77.59, story: "ASI annual meeting at IISc, 2024." }
+      - { name: Rourkela, lat: 22.26, lon: 84.85, story: "ASI annual meeting at NIT Rourkela, 2025." }
+      - { name: Nainital, lat: 29.38, lon: 79.46, story: "ARIES Training School in Observational Astronomy, 2022." }
+      - { name: Mumbai, lat: 19.13, lon: 72.91, story: "Talks at IIT Bombay." }
+      - { name: Bhubaneswar, lat: 20.30, lon: 85.82, story: "Vikiran seminar at NISER, Feb 2024." }
+  - id: "840"
+    iso: US
+    continent: North America
+    name: United States
+    places:
+      - { name: San Diego, lat: 32.72, lon: -117.16, story: "Cool Stars 22, Jul 2024." }
+      - { name: Bozeman, lat: 45.68, lon: -111.04, story: "XMC II: Clouds over Yellowstone, May 2025." }
+  - id: "724"
+    iso: ES
+    continent: Europe
+    name: Spain
+    places:
+      - { name: Madrid, lat: 40.42, lon: -3.70, story: "ESA–ESO Euclid workshop, Oct 2022." }
+      - { name: La Palma, lat: 28.68, lon: -17.86, story: "MunichFest 2025: 40 years of hot luminous stars." }
+  - id: "056"
+    iso: BE
+    continent: Europe
+    name: Belgium
+    places:
+      - { name: Liège, lat: 50.63, lon: 5.57, story: "LIAC 42 \"To Be or not to Be\", Jul 2026." }
+  - id: "756"
+    iso: CH
+    continent: Europe
+    name: Switzerland
+    places:
+      - { name: Lausanne, lat: 46.52, lon: 6.63, story: "EAS 2026: talk, poster and volunteering." }
+  - id: "372"
+    iso: IE
+    continent: Europe
+    name: Ireland
+    places:
+      - { name: Cork, lat: 51.90, lon: -8.47, story: "EAS 2025, as a volunteer." }
+  - id: "300"
+    iso: GR
+    continent: Europe
+    name: Greece
+    places:
+      - { name: Athens, lat: 37.98, lon: 23.73, story: "NEON Observing School, Oct 2024." }
+      - { name: Kryoneri, lat: 37.97, lon: 22.62, story: "Two nights on the 1.2 m Kryoneri telescope." }
+      - { name: Kalavryta, lat: 38.03, lon: 22.11, story: "Observing with the 2.3 m Aristarchos telescope." }
+  - id: "380"
+    iso: IT
+    continent: Europe
+    name: Italy
+    places:
+      - { name: Padova, lat: 45.41, lon: 11.88, story: "EAS Early Career Astronomers, Jun 2024." }

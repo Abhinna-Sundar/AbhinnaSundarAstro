@@ -1,0 +1,46 @@
+name: Build and publish website
+on:
+  push:
+    branches: [main]
+  schedule:
+    - cron: "17 4 * * 1"     # every Monday 04:17 UTC: refresh papers & citations
+  workflow_dispatch: {}        # "Run workflow" button in the Actions tab
+permissions:
+  contents: write
+  pages: write
+  id-token: write
+concurrency: { group: pages, cancel-in-progress: true }
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with: { node-version: 22, cache: npm }
+      - run: npm ci
+      - name: Download pictures listed in src/data/images.yaml
+        run: npm run fetch:images
+      - name: Update papers and citations from SciX/ADS
+        env: { ADS_TOKEN: "${{ secrets.ADS_TOKEN }}" }
+        run: npm run fetch:pubs
+      - name: Save the updated paper list back to the repository
+        run: |
+          if ! git diff --quiet src/data/publications.json; then
+            git config user.name "website-bot"
+            git config user.email "website-bot@users.noreply.github.com"
+            git commit -m "Update publications from SciX/ADS" src/data/publications.json
+            git push
+          fi
+      - run: npm run build
+        env:
+          SITE_URL: ${{ vars.SITE_URL || format('https://{0}.github.io', github.repository_owner) }}
+          BASE_PATH: ${{ vars.BASE_PATH || '/' }}
+      - uses: actions/upload-pages-artifact@v3
+        with: { path: dist }
+  deploy:
+    needs: build
+    runs-on: ubuntu-latest
+    environment: { name: github-pages, url: "${{ steps.d.outputs.page_url }}" }
+    steps:
+      - id: d
+        uses: actions/deploy-pages@v4
