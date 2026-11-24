@@ -135,6 +135,14 @@ function drawSky(){
     if(moon.ill>0.98){ctx.beginPath();ctx.arc(q[0],q[1],8,0,7);ctx.fill();}
     ctx.restore(); ctx.fillStyle='rgba(241,236,223,.9)'; ctx.fillText('Moon',q[0]+12,q[1]+4);}}
 
+  // horizon glow: warm band along the horizon, strongest at dusk/dawn
+  {const tw=Math.max(0,1-Math.abs(sunAlt+6)/14), q0=proj(F,hv(0,az0));
+   if(q0){const y=q0[1], gH=H*0.32, gr=ctx.createLinearGradient(0,y-gH,0,y);
+     gr.addColorStop(0,'rgba(255,120,90,0)');
+     gr.addColorStop(0.55,`rgba(255,140,95,${0.10+0.35*tw})`);
+     gr.addColorStop(0.85,`rgba(255,196,120,${0.18+0.45*tw})`);
+     gr.addColorStop(1,`rgba(120,170,255,${0.10+0.15*night})`);
+     ctx.fillStyle=gr; ctx.fillRect(0,y-gH,W,gH+2);}}
   // ground with ridge
   ctx.beginPath(); let started=false;
   for(let a=az0-100;a<=az0+100;a+=1.5){const q=proj(F,hv(ridge(a),a)); if(!q) continue; if(!started){ctx.moveTo(q[0],q[1]);started=true;} else ctx.lineTo(q[0],q[1]);}
@@ -166,9 +174,17 @@ cv.addEventListener('keydown',e=>{const m={ArrowLeft:-8,ArrowRight:8}; if(m[e.ke
   if(e.key==='ArrowUp'){alt0=Math.min(70,alt0+5);drawSky();e.preventDefault()} if(e.key==='ArrowDown'){alt0=Math.max(5,alt0-5);drawSky();e.preventDefault()}});
 document.querySelectorAll('[data-site]').forEach(b=>b.addEventListener('click',()=>{
   site=SITES[b.dataset.site]; offH=0; document.querySelectorAll('[data-site]').forEach(x=>x.setAttribute('aria-pressed',x===b));
-  az0= site.lat<0?180:180; if(b.dataset.site==='lco'){az0=180;alt0=30;} else {alt0=22;} const t=tonight(); setOff(t);}));
+  az0= site.lat<0?180:180; if(b.dataset.site==='lco'){az0=180;alt0=30;} else {alt0=22;} paintTrack(); const t=tonight(); setOff(t);}));
 const slider=document.getElementById('tSlider'), tOff=document.getElementById('tOff');
 slider.addEventListener('input',()=>{offH=+slider.value; tOff.textContent=(offH>=0?'+':'')+offH.toFixed(1)+' h'; drawSky();});
+function paintTrack(){const A=window.Astronomy; if(!A) return; const obs=new A.Observer(site.lat,site.lon,site.elev);
+  const lo=+slider.min, hi=+slider.max, stops=[];
+  for(let h=lo;h<=hi;h+=0.5){const d=new Date(Date.now()+h*3600e3); const e=A.Equator('Sun',d,obs,true,true); const alt=A.Horizon(d,obs,e.ra,e.dec,'normal').altitude;
+    const n=Math.max(0,Math.min(1,-alt/18)); const tw=Math.max(0,1-Math.abs(alt+4)/10);
+    const r=lerp(lerp(96,10,n),255,tw*0.55), g=lerp(lerp(150,14,n),150,tw*0.45), b=lerp(lerp(220,40,n),110,tw*0.35);
+    stops.push(`rgb(${r|0},${g|0},${b|0}) ${((h-lo)/(hi-lo)*100).toFixed(1)}%`);}
+  slider.style.setProperty('--track',`linear-gradient(90deg,${stops.join(',')})`);
+  const now=(0-lo)/(hi-lo)*100; slider.style.setProperty('--now',now+'%');}
 function setOff(h){offH=h;slider.value=h;tOff.textContent=(h>=0?'+':'')+h.toFixed(1)+' h';drawSky();}
 function tonight(){const A=window.Astronomy; if(!A) return 0; const obs=new A.Observer(site.lat,site.lon,site.elev);
   for(let h=0;h<=24;h+=0.25){const d=new Date(Date.now()+h*3600e3); const e=A.Equator('Sun',d,obs,true,true); if(A.Horizon(d,obs,e.ra,e.dec,'normal').altitude<-15) return h+0.5;} return 0;}
@@ -176,6 +192,7 @@ document.getElementById('tonightBtn').addEventListener('click',()=>setOff(tonigh
 document.getElementById('nowBtn').addEventListener('click',()=>{offH=0;slider.value=0;tOff.textContent='+0.0 h';drawSky();});
 const lb=document.getElementById('linesBtn'); lb.addEventListener('click',()=>{showLines=!showLines;lb.setAttribute('aria-pressed',showLines);drawSky();});
 setInterval(drawSky,30000);
+paintTrack(); setInterval(paintTrack,600000);
 fetch(document.getElementById('sky').dataset.src).then(r=>r.json()).then(j=>{sky=j; const t=tonight(); if(t>0) setOff(t); else drawSky();}).catch(()=>{});
 
 

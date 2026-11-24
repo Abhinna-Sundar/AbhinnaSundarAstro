@@ -31,6 +31,7 @@ export function img(ref) {
 
 export const fonts = {
   // name: [display family, body family]
+  'cormorant-inter':       ['Cormorant Garamond', 'Inter'],
   'sora-inter':            ['Sora', 'Inter'],
   'space-grotesk-plex':    ['Space Grotesk', 'IBM Plex Sans'],
   'fraunces-inter':        ['Fraunces', 'Inter'],

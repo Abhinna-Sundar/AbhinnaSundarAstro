@@ -43,6 +43,6 @@ stats:
   - { n: "30+", l: "talks & seminars" }
   - { n: "3",   l: "survey projects led" }
 
-# Fonts: pick one of  sora-inter | space-grotesk-plex | fraunces-inter |
+# Fonts: pick one of  cormorant-inter | sora-inter | space-grotesk-plex | fraunces-inter |
 #        instrument | dm | outfit-manrope | jakarta | syne-inter
-font: "sora-inter"
+font: "cormorant-inter"
