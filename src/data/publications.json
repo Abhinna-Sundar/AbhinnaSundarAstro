@@ -1,9 +1,9 @@
 {
  "source": "SciX / NASA ADS",
  "updated": "2026-11-24",
- "citations": 362,
- "h_index": 11,
- "refereed": 22,
+ "citations": 159,
+ "h_index": 4,
+ "refereed": 5,
  "papers": [
   {
    "title": "SDSS-V LVM: Mapping of plasma temperatures in the Lagoon Nebula reveals the origin of long-standing chemical abundance discrepancies",
@@ -28,15 +28,26 @@
    "citations": 0
   },
   {
-   "title": "Seasonal Pre-Planting Drought Impact-Based Forecasting of Crop Yield in India",
-   "authors": "Shyrokaya, A., … incl. Samantaray, A.S., et al.",
+   "title": "The Twentieth Data Release of the Sloan Digital Sky Survey: First All-Sky BOSS Spectra, eROSITA-SDSS-V Mapper Coordinated Observations, and a Preview of the Local Volume Mapper",
+   "authors": "SDSS Collaboration, et al.",
    "first": false,
    "year": 2026,
-   "pub": "Earth's Future, 14, e2025EF007128",
+   "pub": "arXiv e-prints, arXiv:2607.26149",
+   "status": "preprint",
+   "bibcode": "2026arXiv260726149S",
+   "url": "https://scixplorer.org/abs/2026arXiv260726149S/abstract",
+   "citations": 10
+  },
+  {
+   "title": "The Nineteenth Data Release of the Sloan Digital Sky Survey",
+   "authors": "SDSS Collaboration, et al.",
+   "first": false,
+   "year": 2026,
+   "pub": "The Astrophysical Journal Supplement Series, 285, 9",
    "status": "published",
-   "bibcode": "2026EaFut..1407128S",
-   "url": "https://scixplorer.org/abs/2026EaFut..1407128S/abstract",
-   "citations": 0
+   "bibcode": "2026ApJS..285....9S",
+   "url": "https://scixplorer.org/abs/2026ApJS..285....9S/abstract",
+   "citations": 124
   },
   {
    "title": "From Astronomy to Astrology: Testing the Illusion of Zodiac-Based Personality Prediction with Machine Learning",
@@ -47,17 +58,6 @@
    "status": "preprint",
    "bibcode": "2026arXiv260329033S",
    "url": "https://scixplorer.org/abs/2026arXiv260329033S/abstract",
-   "citations": 0
-  },
-  {
-   "title": "Plant and soil characteristics as key predictors for future agricultural drought",
-   "authors": "Samantaray, A. Kumar; Steinert, N. J.; Mooney, P. A.",
-   "first": true,
-   "year": 2025,
-   "pub": "Environmental Research Letters, 20, 054059",
-   "status": "published",
-   "bibcode": "2025ERL....20e4059S",
-   "url": "https://scixplorer.org/abs/2025ERL....20e4059S/abstract",
    "citations": 0
   },
   {
@@ -147,248 +147,6 @@
    "bibcode": "2024asi..confP..25S",
    "url": "https://scixplorer.org/abs/2024asi..confP..25S/abstract",
    "citations": 0
-  },
-  {
-   "title": "Resonant capture and Sommerfeld effect due to torsional vibrations in a double Cardan joint driveline",
-   "authors": "Bharti, Saurabh K.; Samantaray, A. K.",
-   "first": false,
-   "year": 2021,
-   "pub": "Communications in Nonlinear Science and Numerical Simulations, 97, 105728",
-   "status": "published",
-   "bibcode": "2021CNSNS..9705728B",
-   "url": "https://scixplorer.org/abs/2021CNSNS..9705728B/abstract",
-   "citations": 6
-  },
-  {
-   "title": "Miniaturization of a Planar Cable-Driven 3D Printer using Optimization",
-   "authors": "Chawla, Ishan, … incl. Samantaray, A.S., et al.",
-   "first": false,
-   "year": 2020,
-   "pub": "2020 International Conference on Manipulation, Automation and Robotics at Small Scales (MARSS), 21",
-   "status": "other",
-   "bibcode": "2020mars.conf...21C",
-   "url": "https://scixplorer.org/abs/2020mars.conf...21C/abstract",
-   "citations": 0
-  },
-  {
-   "title": "The Sommerfeld effect of second kind: passage through parametric instability in a rotor with non-circular shaft and anisotropic flexible supports",
-   "authors": "Bharti, S. K., … incl. Samantaray, A.S., et al.",
-   "first": false,
-   "year": 2020,
-   "pub": "Nonlinear Dynamics, 100, 3171",
-   "status": "published",
-   "bibcode": "2020NonDy.100.3171B",
-   "url": "https://scixplorer.org/abs/2020NonDy.100.3171B/abstract",
-   "citations": 7
-  },
-  {
-   "title": "Regionalization of Monsoon Precipitation Patterns in Tropical Climate Areas",
-   "authors": "Samantaray, A. K., et al.",
-   "first": true,
-   "year": 2019,
-   "pub": "AGU Fall Meeting Abstracts, 2019, GC43F-1340",
-   "status": "other",
-   "bibcode": "2019AGUFMGC43F1340S",
-   "url": "https://scixplorer.org/abs/2019AGUFMGC43F1340S/abstract",
-   "citations": 0
-  },
-  {
-   "title": "Sommerfeld effect at forward and backward critical speeds in a rigid rotor shaft system with anisotropic supports",
-   "authors": "Bharti, Saurabh Kumar, … incl. Samantaray, A.S., et al.",
-   "first": false,
-   "year": 2019,
-   "pub": "Journal of Sound Vibration, 442, 330",
-   "status": "published",
-   "bibcode": "2019JSV...442..330B",
-   "url": "https://scixplorer.org/abs/2019JSV...442..330B/abstract",
-   "citations": 20
-  },
-  {
-   "title": "Sommerfeld effect in an oscillator with a reciprocating mass",
-   "authors": "Sinha, Anubhab, … incl. Samantaray, A.S., et al.",
-   "first": false,
-   "year": 2018,
-   "pub": "Nonlinear Dynamics, 93, 1719",
-   "status": "published",
-   "bibcode": "2018NonDy..93.1719S",
-   "url": "https://scixplorer.org/abs/2018NonDy..93.1719S/abstract",
-   "citations": 5
-  },
-  {
-   "title": "Control strategies for DC motors driving rotor dynamic systems through resonance",
-   "authors": "Bisoi, Alfa; Samantaray, A. K.; Bhattacharyya, Ranjan",
-   "first": false,
-   "year": 2017,
-   "pub": "Journal of Sound Vibration, 411, 304",
-   "status": "published",
-   "bibcode": "2017JSV...411..304B",
-   "url": "https://scixplorer.org/abs/2017JSV...411..304B/abstract",
-   "citations": 9
-  },
-  {
-   "title": "Ball bearing defect models: A study of simulated and experimental fault signatures",
-   "authors": "Mishra, C.; Samantaray, A. K.; Chakraborty, G.",
-   "first": false,
-   "year": 2017,
-   "pub": "Journal of Sound Vibration, 400, 86",
-   "status": "published",
-   "bibcode": "2017JSV...400...86M",
-   "url": "https://scixplorer.org/abs/2017JSV...400...86M/abstract",
-   "citations": 44
-  },
-  {
-   "title": "Rolling element bearing fault diagnosis under slow speed operation using wavelet de-noising",
-   "authors": "Mishra, C.; Samantaray, A. K.; Chakraborty, G.",
-   "first": false,
-   "year": 2017,
-   "pub": "Measurement, 103, 77",
-   "status": "published",
-   "bibcode": "2017Meas..103...77M",
-   "url": "https://scixplorer.org/abs/2017Meas..103...77M/abstract",
-   "citations": 74
-  },
-  {
-   "title": "Sommerfeld effect in a gyroscopic overhung rotor-disk system",
-   "authors": "Bisoi, Alfa; Samantaray, A. K.; Bhattacharyya, R.",
-   "first": false,
-   "year": 2017,
-   "pub": "Nonlinear Dynamics, 88, 1565",
-   "status": "published",
-   "bibcode": "2017NonDy..88.1565B",
-   "url": "https://scixplorer.org/abs/2017NonDy..88.1565B/abstract",
-   "citations": 9
-  },
-  {
-   "title": "Bond graph modeling and experimental verification of a novel scheme for fault diagnosis of rolling element bearings in special operating conditions",
-   "authors": "Mishra, C.; Samantaray, A. K.; Chakraborty, G.",
-   "first": false,
-   "year": 2016,
-   "pub": "Journal of Sound Vibration, 377, 302",
-   "status": "published",
-   "bibcode": "2016JSV...377..302M",
-   "url": "https://scixplorer.org/abs/2016JSV...377..302M/abstract",
-   "citations": 15
-  },
-  {
-   "title": "Rolling element bearing defect diagnosis under variable speed operation through angle synchronous averaging of wavelet de-noised estimate",
-   "authors": "Mishra, C.; Samantaray, A. K.; Chakraborty, G.",
-   "first": false,
-   "year": 2016,
-   "pub": "Mechanical Systems and Signal Processing, 72, 206",
-   "status": "published",
-   "bibcode": "2016MSSP...72..206M",
-   "url": "https://scixplorer.org/abs/2016MSSP...72..206M/abstract",
-   "citations": 69
-  },
-  {
-   "title": "Posture control strategy of a platform using a RP manipulator",
-   "authors": "Gor, M. M., … incl. Samantaray, A.S., et al.",
-   "first": false,
-   "year": 2014,
-   "pub": "2014 14th International Conference on Control, Automation and Systems (ICCAS 2014), 40",
-   "status": "other",
-   "bibcode": "2014ccas.conf...40G",
-   "url": "https://scixplorer.org/abs/2014ccas.conf...40G/abstract",
-   "citations": 0
-  },
-  {
-   "title": "Bond graph modeling of an over-actuated intelligent autonomous vehicle with decoupled steering wheel",
-   "authors": "Bera, T. K., … incl. Samantaray, A.S., et al.",
-   "first": false,
-   "year": 2012,
-   "pub": "2012 IEEE International Conference on Robotics and Biomimetics (ROBIO), 109",
-   "status": "other",
-   "bibcode": "2012robi.conf..109B",
-   "url": "https://scixplorer.org/abs/2012robi.conf..109B/abstract",
-   "citations": 0
-  },
-  {
-   "title": "Stability of an internally damped non-ideal flexible spinning shaft",
-   "authors": "Dasgupta, S. S.; Samantaray, A. K.; Bhattacharyya, R.",
-   "first": false,
-   "year": 2010,
-   "pub": "International Journal of Non Linear Mechanics, 45, 286",
-   "status": "published",
-   "bibcode": "2010IJNLM..45..286D",
-   "url": "https://scixplorer.org/abs/2010IJNLM..45..286D/abstract",
-   "citations": 11
-  },
-  {
-   "title": "Steady-state dynamics of a non-ideal rotor with internal damping and gyroscopic effects",
-   "authors": "Samantaray, A. K.",
-   "first": true,
-   "year": 2009,
-   "pub": "Nonlinear Dynamics, 56, 443",
-   "status": "published",
-   "bibcode": "2009NonDy..56..443S",
-   "url": "https://scixplorer.org/abs/2009NonDy..56..443S/abstract",
-   "citations": 14
-  },
-  {
-   "title": "Reconfiguration of Directional Handling of an Autonomous Vehicle",
-   "authors": "Pathak, P. M., … incl. Samantaray, A.S., et al.",
-   "first": false,
-   "year": 2008,
-   "pub": "2008 International Conference on Information Management, Innovation Management and Industrial Engineering, 96",
-   "status": "other",
-   "bibcode": "2008icii.conf...96P",
-   "url": "https://scixplorer.org/abs/2008icii.conf...96P/abstract",
-   "citations": 1
-  },
-  {
-   "title": "A note on internal damping induced self-excited vibration in a rotor by considering source loading of a DC motor drive",
-   "authors": "Samantaray, A.",
-   "first": true,
-   "year": 2008,
-   "pub": "International Journal of Non Linear Mechanics, 43, 1012",
-   "status": "published",
-   "bibcode": "2008IJNLM..43.1012S",
-   "url": "https://scixplorer.org/abs/2008IJNLM..43.1012S/abstract",
-   "citations": 5
-  },
-  {
-   "title": "On the stability of Crandall gyropendulum",
-   "authors": "Samantaray, A. K.; Bhattacharyya, R.; Mukherjee, A.",
-   "first": true,
-   "year": 2008,
-   "pub": "Physics Letters A, 372, 238",
-   "status": "published",
-   "bibcode": "2008PhLA..372..238S",
-   "url": "https://scixplorer.org/abs/2008PhLA..372..238S/abstract",
-   "citations": 12
-  },
-  {
-   "title": "Bicausal bond graphs for supervision: From fault detection and isolation to fault accommodation",
-   "authors": "Samantaray, A. K.; Ghoshal, S. K.",
-   "first": true,
-   "year": 2008,
-   "pub": "Journal of the Franklin Institute, 345, 1",
-   "status": "other",
-   "bibcode": "2008FrInJ.345....1S",
-   "url": "https://scixplorer.org/abs/2008FrInJ.345....1S/abstract",
-   "citations": 15
-  },
-  {
-   "title": "Some studies on rotors with polynomial type non-linear external and internal damping",
-   "authors": "Samantaray, A.; Mukherjee, A.; Bhattacharyya, R.",
-   "first": true,
-   "year": 2006,
-   "pub": "International Journal of Non Linear Mechanics, 41, 1007",
-   "status": "published",
-   "bibcode": "2006IJNLM..41.1007S",
-   "url": "https://scixplorer.org/abs/2006IJNLM..41.1007S/abstract",
-   "citations": 9
-  },
-  {
-   "title": "Harmonic oscillations of non-conservative, asymmetric, two-degree-of-freedom systems",
-   "authors": "Bhattacharyya, R.; Mukherjee, A.; Samantaray, A. K.",
-   "first": false,
-   "year": 2003,
-   "pub": "Journal of Sound Vibration, 264, 973",
-   "status": "published",
-   "bibcode": "2003JSV...264..973B",
-   "url": "https://scixplorer.org/abs/2003JSV...264..973B/abstract",
-   "citations": 12
   }
  ]
 }
