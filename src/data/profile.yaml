@@ -27,7 +27,7 @@ location: { name: "Heidelberg", lat: 49.398, lon: 8.672, elev: 120, tz: "Europe/
 
 # Profile links. "icon" is the website whose small logo is shown next to the label.
 links:
-  - { label: "SciX / ADS",     url: "https://scixplorer.org/search?q=orcid%3A0000-0002-0635-2264&sort=date%20desc", icon: "scixplorer.org" }
+  - { label: "SciX / ADS",     url: "https://scixplorer.org/user/libraries/-Ye_Q6HtQquk04SDE0tEtA", icon: "scixplorer.org" }
   - { label: "Google Scholar", url: "https://scholar.google.com/citations?user=y0Nnf50AAAAJ", icon: "scholar.google.com" }
   - { label: "ORCID",          url: "https://orcid.org/0000-0002-0635-2264", icon: "orcid.org" }
   - { label: "GitHub",         url: "https://github.com/Abhinna-Sundar", icon: "github.com" }
