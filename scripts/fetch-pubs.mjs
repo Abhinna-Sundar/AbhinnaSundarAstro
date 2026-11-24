@@ -10,12 +10,32 @@ if (!token) { console.log('ADS_TOKEN not set: keeping the existing publication l
 
 const cfg = yaml.load(fs.readFileSync('src/data/ads.yaml', 'utf8'));
 const fl = 'bibcode,title,author,year,pub,volume,page,citation_count,property,doctype,doi,pubdate';
-const url = 'https://api.adsabs.harvard.edu/v1/search/query?' + new URLSearchParams({ q: cfg.query, fl, rows: '300', sort: 'date desc' });
+const API = 'https://api.adsabs.harvard.edu/v1';
+const H = { Authorization: `Bearer ${token}` };
+async function get(u) {
+  const r = await fetch(u, { headers: H });
+  if (!r.ok) throw new Error(`ADS answered ${r.status}: ${(await r.text()).slice(0, 200)}`);
+  return r.json();
+}
 
 try {
-  const res = await fetch(url, { headers: { Authorization: `Bearer ${token}` } });
-  if (!res.ok) throw new Error(`ADS answered ${res.status}: ${(await res.text()).slice(0, 200)}`);
-  const docs = (await res.json()).response.docs.filter(d => !(cfg.exclude || []).includes(d.bibcode));
+  // 1. Bibcodes in your SciX library (only these are shown)
+  const bibs = [];
+  for (let start = 0; ; start += 200) {
+    const lib = await get(`${API}/biblib/libraries/${cfg.library}?rows=200&start=${start}`);
+    bibs.push(...(lib.documents || []));
+    if ((lib.documents || []).length < 200) break;
+  }
+  const wanted = bibs.filter(b => !(cfg.exclude || []).includes(b));
+  if (!wanted.length) throw new Error('the library is empty or could not be read');
+  // 2. Details and citation counts for those bibcodes
+  const docs = [];
+  for (let i = 0; i < wanted.length; i += 50) {
+    const q = 'bibcode:(' + wanted.slice(i, i + 50).map(b => `"${b}"`).join(' OR ') + ')';
+    const r = await get(`${API}/search/query?` + new URLSearchParams({ q, fl, rows: '100', sort: 'date desc' }));
+    docs.push(...r.response.docs);
+  }
+  docs.sort((a, b) => (b.pubdate || '').localeCompare(a.pubdate || ''));
 
   const papers = docs.map(d => {
     const props = d.property || [];

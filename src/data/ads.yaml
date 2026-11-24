@@ -1,9 +1,7 @@
-# How the publication list is pulled from SciX/ADS.
-# Source: your SciX library. Add or remove papers in the library on SciX,
-# and the website follows at the next weekly update (or "Run workflow").
+# Which papers appear on the website: ONLY the papers in this SciX library.
+# Add or remove papers in the library on SciX; the website follows at the
+# next weekly update (or Actions → "Run workflow").
 # https://scixplorer.org/user/libraries/-Ye_Q6HtQquk04SDE0tEtA
-query: 'docs(library/-Ye_Q6HtQquk04SDE0tEtA)'
-# Alternative: everything linked to your ORCID or name
-# query: 'orcid:"0000-0002-0635-2264" OR author:"Samantaray, Abhinna"'
+library: "-Ye_Q6HtQquk04SDE0tEtA"
 # Bibcodes to hide even if they are in the library.
 exclude: []

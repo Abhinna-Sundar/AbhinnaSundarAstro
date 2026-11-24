@@ -7,7 +7,7 @@ const fam = f => f.replace(/ /g, '+') + ':wght@400;500;600;700';
 const fontHref = `https://fonts.googleapis.com/css2?family=${[...new Set([fd, fb])].map(fam).join('&family=')}&family=JetBrains+Mono:wght@400;500&display=swap`;
 const parts = profile.name.split(' ');
 const mark = parts.slice(0, -1).map(w => w[0] + '.').join(' ') + ' ' + parts.at(-1);
-const nav = [['research','Research'],['projects','Data & ML'],['writing','Writing'],['travel','Travel'],['about','About']];
+const nav = [['about','About'],['research','Research'],['projects','Data & ML'],['writing','Writing'],['travel','Travel']];
 ---
 <!doctype html>
 <html lang="en">
