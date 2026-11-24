@@ -31,11 +31,14 @@ jobs:
             git commit -m "Update publications from SciX/ADS" src/data/publications.json
             git push
           fi
+      - name: Ask GitHub Pages for this site's address
+        id: pages
+        uses: actions/configure-pages@v5
       - run: npm run build
         env:
-          SITE_URL: ${{ vars.SITE_URL || format('https://{0}.github.io', github.repository_owner) }}
-          # Served from /<repo-name>/ unless the repo is <user>.github.io or a custom domain (SITE_URL) is set
-          BASE_PATH: ${{ vars.BASE_PATH || ((vars.SITE_URL || endsWith(github.event.repository.name, '.github.io')) && '/') || format('/{0}', github.event.repository.name) }}
+          # Filled in by GitHub: works for /AbhinnaSundarAstro/, <user>.github.io and custom domains
+          SITE_URL: ${{ steps.pages.outputs.origin }}
+          BASE_PATH: ${{ steps.pages.outputs.base_path || '/' }}
       - uses: actions/upload-pages-artifact@v3
         with: { path: dist }
   deploy:

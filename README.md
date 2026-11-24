@@ -60,12 +60,12 @@ In `profile.yaml`, set `font:` to one of `sora-inter`, `space-grotesk-plex`, `fr
    1. Log in at https://scixplorer.org → Settings → API Token → generate a token.
    2. In GitHub go to Settings → Secrets and variables → Actions → New repository secret. Name it `ADS_TOKEN` and paste the token as the value.
    3. Claim your papers on SciX through ORCID (SciX → ORCID), so the ORCID search finds them all.
-4. **First run.** Actions tab → "Build and publish website" → Run workflow. When it's green, the site is live at `https://abhinna-sundar.github.io/AbhinnaSundarAstro/`. Set the repository variable `BASE_PATH` to `/AbhinnaSundarAstro` until you add a custom domain. Alternatively, rename the repository to `Abhinna-Sundar.github.io` so the site sits at the root.
+4. **First run.** Actions tab → "Build and publish website" → Run workflow. When it's green, the site is live at `https://abhinna-sundar.github.io/AbhinnaSundarAstro/`. The build picks up the address by itself. Rename the repository to `Abhinna-Sundar.github.io` if you want the site at the root.
 5. **Custom domain (optional, ~€10–15/year).**
    1. Buy or renew the domain at a registrar (Cloudflare Registrar, Porkbun, Namecheap, INWX…).
    2. In the registrar's DNS settings add four `A` records for `@`: `185.199.108.153`, `185.199.109.153`, `185.199.110.153`, `185.199.111.153`, and a `CNAME` record `www` → `abhinna-sundar.github.io`.
    3. In GitHub go to Settings → Pages → Custom domain, enter `www.yourdomain.com`, then tick **Enforce HTTPS** once it's offered.
-   4. In Settings → Secrets and variables → Actions → Variables, set `SITE_URL` = `https://www.yourdomain.com` and `BASE_PATH` = `/`.
+   4. Re-run the workflow. The build adapts to the new domain by itself.
 
 ## Run it on your laptop (optional)
 ```
