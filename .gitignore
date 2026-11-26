@@ -4,3 +4,4 @@ dist/
 .DS_Store
 old-wix-site/
 src/scripts/
+anaconda_projects/
